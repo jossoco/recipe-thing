@@ -1,4 +1,4 @@
-function Recipe (options) {
+function RecipeViewer (options) {
 
   this.TEMPLATE_PATH = 'static/js/ejs/';
   this.TEMPLATE_SUFFIX = '.ejs';
@@ -92,6 +92,6 @@ $(document).ready(function () {
     steps: recipeData.steps,
     imageUrl: ''
   };
-  var recipe = new Recipe();
+  var recipe = new RecipeViewer();
   recipe.init(options);
 });

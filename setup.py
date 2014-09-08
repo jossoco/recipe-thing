@@ -13,6 +13,7 @@ setup(name='recipez',
       url='',
       packages=find_packages(),
       install_requires=[
-        "Flask>=0.10.1"
+        "Flask>=0.10.1",
+        "beautifulsoup4>=4.3.2"
       ]
 )

@@ -82,14 +82,15 @@ function Recipe (options) {
 };
 
 $(document).ready(function () {
-  var imageUrl = 'http://d24edc7kaf4agn.cloudfront.net/1620905/67370600/how-to-saute-onions.jpg';
-  var steps = ['Heat oil in skillet.', 'Add chopped onions.', 'Saute until translucent.'];
+  //var imageUrl = 'http://d24edc7kaf4agn.cloudfront.net/1620905/67370600/how-to-saute-onions.jpg';
+  //var steps = ['Heat oil in skillet.', 'Add chopped onions.', 'Saute until translucent.'];
 
   var options = {
-    id: 'onions',
-    title: 'Caramelized Onions',
-    steps: steps,
-    imageUrl: imageUrl
+    id: 'test',
+    url: recipeData.url,
+    title: recipeData.title,
+    steps: recipeData.steps,
+    imageUrl: ''
   };
   var recipe = new Recipe();
   recipe.init(options);

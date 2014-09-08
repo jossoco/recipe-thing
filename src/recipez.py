@@ -2,7 +2,6 @@ from flask import Flask, request, render_template
 from bs4 import BeautifulSoup
 import urllib2
 import json
-#from django.utils import simplejson
 
 app = Flask(__name__)
 

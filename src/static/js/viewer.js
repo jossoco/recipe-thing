@@ -9,7 +9,7 @@ function RecipeViewer (options) {
   };
 
   this.start = function (options) {
-    this.currentStepIndex = 0;
+    this.currentStepIndex = -1;
     this.render(options);
 
     this.recipeContainer = $('#' + this.id);
@@ -22,13 +22,15 @@ function RecipeViewer (options) {
     this.backButton = this.recipeContainer.find('.back-btn');
     this.nextButton = this.recipeContainer.find('.next-btn');
     this.doneButton = this.recipeContainer.find('.done-btn');
+    this.startButton = this.recipeContainer.find('.start-btn');
     this.progressBar = this.recipeContainer.find('.recipe-meter span');
 
     this.setPanelHeights();
     this.bindEvents({
       'click .next-btn': this.onNextButtonClick,
       'click .back-btn': this.onBackButtonClick,
-      'click .done-btn': this.onDoneButtonClick
+      'click .done-btn': this.onDoneButtonClick,
+      'click .start-btn': this.onStartButtonClick
     });
     this.updateCurrentStep();
   };
@@ -84,6 +86,15 @@ function RecipeViewer (options) {
     this.doneButton.addClass('hidden');
     this.stepsContainer.find('.highlighted').removeClass('highlighted');
     this.scrollSteps();
+  };
+
+  this.onStartButtonClick = function () {
+    this.startButton.addClass('hidden');
+    this.currentStepContainer.removeClass('hidden');
+    this.recipeContainer.find('.recipe-meter-container').removeClass('hidden');
+    this.recipeContainer.find('.recipe-buttons').removeClass('hidden');
+    this.currentStepIndex += 1;
+    this.updateCurrentStep();
   };
 
   this.setProgressBarPercentage = function (percentage) {

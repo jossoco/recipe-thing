@@ -67,6 +67,12 @@ html, body, .recipe {
   min-height: 70%;
 }
 
+.recipe-buttons.hidden,
+.recipe-meter-container.hidden,
+.recipe-current-step.hidden {
+  visibility: hidden;
+}
+
 .recipe-title {
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -119,7 +125,6 @@ html, body, .recipe {
 }
 
 .button.done-btn:hover {
-  background-color: #B65559;
   background-color: #D30C13;
 }
 
@@ -196,4 +201,21 @@ html, body, .recipe {
   text-transform: uppercase;
   padding-bottom: 8px;
   padding-left: 10px;
+}
+
+.start-panel {
+  text-align: center;
+}
+
+.start-btn {
+  width: 200px;
+  height: 30px;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-top: 35%;
+  background-color: #A81D22;
+}
+
+.start-btn:hover {
+  background-color: #D30C13;
 }

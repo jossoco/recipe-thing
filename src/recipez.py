@@ -20,14 +20,23 @@ def main():
 def _parse(content):
     soup = BeautifulSoup(content)
     data = {}
-    data['title'], data['sourceName'] = _parseTitle(soup.title.string)
+
+    title_parts = _parseTitle(soup.title.string)
+    if type(title_parts) is tuple:
+      data['title'], data['sourceName'] = _parseTitle(soup.title.string)
+    else:
+      data['title'] = title_parts
+      data['sourceName'] = ''
+
     data['steps'] = _parseTextList(soup, "instruction")
     data['ingredients'] = _parseTextList(soup, "ingredient")
     return data
 
 def _parseTitle(title):
     parts = title.split(' - ')
-    return (parts[0], parts[1])
+    if len(parts) == 2:
+      return (parts[0], parts[1])
+    return title
 
 def _parseTextList(soup, class_name):
     list = []

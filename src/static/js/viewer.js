@@ -127,6 +127,7 @@ function RecipeViewer (options) {
     if (highlightedStep.length > 0) {
       currentStepTop = highlightedStep.position().top;
     }
+
     var list = this.stepsContainer.find('ol');
     if (currentStepTop > 50) {
       list.animate({'top': 0 - currentStepTop + 50 + 'px'});

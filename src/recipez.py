@@ -8,6 +8,7 @@ app = Flask(__name__)
 @app.route("/")
 def main():
     url = request.args.get('url', None)
+    data = None
     if url:
         req = urllib2.Request(url)
         req.add_header('User-Agent', 'Recipe/1.0 +https://github.com/jossoco/recipe-thing')
@@ -19,13 +20,22 @@ def main():
 def _parse(content):
     soup = BeautifulSoup(content)
     data = {}
-    data['title'] = soup.title.string
-    data['steps'] = []
-
-    inst_els = soup.find_all(class_="instruction")
-    for el in inst_els:
-        data['steps'].append(el.get_text())
+    data['title'], data['sourceName'] = _parseTitle(soup.title.string)
+    data['steps'] = _parseSteps(soup)
     return data
+
+def _parseTitle(title):
+    parts = title.split(' - ')
+    return (parts[0], parts[1])
+
+def _parseSteps(soup):
+    steps = []
+
+    # Look for recipe tags
+    instr_els = soup.find_all(class_="instruction")
+    for el in instr_els:
+        steps.append(el.get_text())
+    return steps
 
 
 if __name__ == "__main__":

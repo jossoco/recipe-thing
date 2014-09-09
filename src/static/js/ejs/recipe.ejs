@@ -1,7 +1,7 @@
 <div id="<%= id %>" class="recipe">
-  <div class="recipe-image" style="background-image: url('<%=imageUrl%>')"></div>
+  <div class="recipe-image" style="background-image: url('<%= imageUrl %>')"></div>
   <div class="recipe-title"><%= title %></div>
-  <div class="recipe-source"><a href="<%= url %>">Source</a></div>
+  <div class="recipe-source">Source: <a href="<%= url %>"><%= sourceName %></a></div>
 
   <div class="recipe-steps">
     <ol>

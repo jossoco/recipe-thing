@@ -52,3 +52,31 @@ body {
   height: 150px;
   display: none;
 }
+
+.button {
+  background-color: #2A9AAE;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  min-width: 60px;
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+  color: #FFF;
+  font-size: 16px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.button:hover {
+  background-color: #4FB5B3;
+}
+
+.button.disabled {
+  background-color: #AAA;
+  cursor: default;
+}

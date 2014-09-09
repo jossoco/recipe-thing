@@ -58,26 +58,30 @@ function RecipeViewer (options) {
     }
 
     if (!this.steps[this.currentStepIndex + 1]) {
-      this.nextButton.attr('disabled', 'disabled');
+      this.nextButton.addClass('disabled');
     } else {
-      this.nextButton.removeAttr('disabled');
+      this.nextButton.removeClass('disabled');
     }
 
     if (!this.steps[this.currentStepIndex - 1]) {
-      this.backButton.attr('disabled', 'disabled');
+      this.backButton.addClass('disabled');
     } else {
-      this.backButton.removeAttr('disabled');
+      this.backButton.removeClass('disabled');
     }
   };
 
   this.onNextButtonClick = function () {
-    this.currentStepIndex += 1;
-    this.updateCurrentStep();
+    if (!this.nextButton.hasClass('disabled')) {
+      this.currentStepIndex += 1;
+      this.updateCurrentStep();
+    }
   };
 
   this.onBackButtonClick = function () {
-    this.currentStepIndex -= 1;
-    this.updateCurrentStep();
+    if (!this.backButton.hasClass('disabled')) {
+      this.currentStepIndex -= 1;
+      this.updateCurrentStep();
+    }
   };
 };
 

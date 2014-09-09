@@ -56,12 +56,41 @@ html, body, .recipe {
   padding: 18px;
 }
 
+.step-image {
+  display: none;
+  background-image: url('/static/images/plate-and-utensils.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin-top: 80px;
+  height: 220px;;
+  width: 325px;
+  opacity: 0.7;
+}
+
+.recipe-current-step.complete {
+  text-align: center;
+}
+
+.recipe-current-step.complete .step-text {
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+}
+
+.recipe-current-step.complete .step-image {
+  display: inline-block;
+}
+
 .recipe-buttons {
   text-align: center;
 }
 
-.done-btn {
-  display: none;
+.button.done-btn {
+  background-color: #A81D22;
+}
+
+.button.done-btn:hover {
+  background-color: #B65559;
 }
 
 .recipe-steps ol {
@@ -91,7 +120,7 @@ html, body, .recipe {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
-  min-width: 60px;
+  min-width: 70px;
   display: inline-block;
   cursor: pointer;
   padding: 10px;
@@ -109,9 +138,17 @@ html, body, .recipe {
   background-color: #4FB5B3;
 }
 
+.button.hidden {
+  display: none;
+}
+
 .button.disabled {
   background-color: #AAA;
   cursor: default;
+}
+
+.recipe-meter-container {
+  padding-bottom: 10px;
 }
 
 .recipe-meter {
@@ -122,4 +159,10 @@ html, body, .recipe {
   -moz-border-radius: 20px;
   border-radius: 20px;
   margin-right: 10px;
+}
+
+.meter-label {
+  text-transform: uppercase;
+  padding-bottom: 8px;
+  padding-left: 10px;
 }

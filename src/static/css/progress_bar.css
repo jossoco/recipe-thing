@@ -50,3 +50,12 @@
 	position: relative;
 	overflow: hidden;
 }
+
+.meter > span.complete {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  -webkit-border-top-right-radius: 20px;
+  -webkit-border-bottom-right-radius: 20px;
+  -moz-border-radius-topright: 20px;
+  -moz-border-radius-bottomright: 20px;
+}

@@ -16,8 +16,9 @@ function RecipeViewer (options) {
     this.headerContainer = this.recipeContainer.find('.recipe-header');
     this.bodyContainer = this.recipeContainer.find('.recipe-body');
     this.stepsContainer = this.recipeContainer.find('.recipe-steps');
-    this.currentStepNumberContainer = this.recipeContainer.find('.recipe-current-step .step-number');
-    this.currentStepTextContainer = this.recipeContainer.find('.recipe-current-step .step-text');
+    this.currentStepContainer = this.recipeContainer.find('.recipe-current-step');
+    this.currentStepNumberContainer = this.currentStepContainer.find('.step-number');
+    this.currentStepTextContainer = this.currentStepContainer.find('.step-text');
     this.backButton = this.recipeContainer.find('.back-btn');
     this.nextButton = this.recipeContainer.find('.next-btn');
     this.doneButton = this.recipeContainer.find('.done-btn');
@@ -26,7 +27,8 @@ function RecipeViewer (options) {
     this.setPanelHeights();
     this.bindEvents({
       'click .next-btn': this.onNextButtonClick,
-      'click .back-btn': this.onBackButtonClick
+      'click .back-btn': this.onBackButtonClick,
+      'click .done-btn': this.onDoneButtonClick
     });
     this.updateCurrentStep();
   };
@@ -39,9 +41,12 @@ function RecipeViewer (options) {
       $(this.stepsContainer.find('li')[this.currentStepIndex]).addClass('highlighted');
     }
 
-    if (this.currentStepIndex === this.steps.length) {
-      this.nextButton.hide();
-      this.doneButton.show();
+    if (this.currentStepIndex + 1 === this.steps.length) {
+      this.nextButton.addClass('hidden');
+      this.doneButton.removeClass('hidden');
+    } else {
+      this.nextButton.removeClass('hidden');
+      this.doneButton.addClass('hidden');
     }
 
     if (!this.steps[this.currentStepIndex - 1]) {
@@ -50,8 +55,8 @@ function RecipeViewer (options) {
       this.backButton.removeClass('disabled');
     }
 
-    var progress = this.currentStepIndex / this.steps.length * 100;
-    this.progressBar.css('width', progress + '%');
+    var progressPercent = this.currentStepIndex / this.steps.length * 100;
+    this.setProgressBarPercentage(progressPercent);
   };
 
   this.onNextButtonClick = function () {
@@ -65,6 +70,25 @@ function RecipeViewer (options) {
     if (!this.backButton.hasClass('disabled')) {
       this.currentStepIndex -= 1;
       this.updateCurrentStep();
+      this.currentStepContainer.removeClass('complete');
+    }
+  };
+
+  this.onDoneButtonClick = function () {
+    this.currentStepIndex += 1;
+    this.currentStepNumberContainer.text('Done!');
+    this.currentStepTextContainer.text('');
+    this.currentStepContainer.addClass('complete');
+    this.setProgressBarPercentage(100);
+    this.doneButton.addClass('hidden');
+  };
+
+  this.setProgressBarPercentage = function (percentage) {
+    this.progressBar.css('width', percentage + '%');
+    if (parseInt(100) === percentage) {
+      this.progressBar.addClass('complete');
+    } else {
+      this.progressBar.removeClass('complete');
     }
   };
 

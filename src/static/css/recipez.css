@@ -8,7 +8,7 @@ html, body, .recipe {
 }
 
 .recipe-header {
-  height: 15%;
+  height: 12%;
 }
 
 .recipe-panel {
@@ -40,14 +40,26 @@ html, body, .recipe {
   margin: 10px;
 }
 
+.recipe-ingredients ul,
+.recipe-steps ol {
+  font-family: 'Helvetica', sans-serif;
+}
+
 .recipe-current-step {
   margin-left: 0;
   height: 70%;
 }
 
 .recipe-title {
-  font-family: 'Yanone Kaffeesatz', sans-serif;
   text-transform: uppercase;
+  margin-bottom: 8px;
+  padding-left: 18px;
+}
+
+.recipe-source {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 18px;
 }
 
 .step-text {
@@ -91,10 +103,11 @@ html, body, .recipe {
 
 .button.done-btn:hover {
   background-color: #B65559;
+  background-color: #D30C13;
 }
 
 .recipe-steps ol {
-  margin: 0;
+  margin: 8px 0 0 0;
 }
 
 .recipe-steps li {

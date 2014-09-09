@@ -50,6 +50,10 @@ html, body, .recipe {
   z-index: 1;
 }
 
+.recipe-ingredients ul {
+  padding: 10px 10px 18px 40px;
+}
+
 .recipe-steps-header {
   height: 35px;
   width: 100%;

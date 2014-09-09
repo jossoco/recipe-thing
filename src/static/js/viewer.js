@@ -23,23 +23,27 @@ function RecipeViewer (options) {
     this.nextButton = this.recipeContainer.find('.next-btn');
     this.doneButton = this.recipeContainer.find('.done-btn');
     this.startButton = this.recipeContainer.find('.start-btn');
+    this.restartButton = this.recipeContainer.find('.restart-btn');
     this.progressBar = this.recipeContainer.find('.recipe-meter span');
+    this.stepsPanel = this.recipeContainer.find('.steps-panel');
+    this.donePanel = this.recipeContainer.find('.done-panel');
 
     this.setPanelHeights();
     this.bindEvents({
       'click .next-btn': this.onNextButtonClick,
       'click .back-btn': this.onBackButtonClick,
       'click .done-btn': this.onDoneButtonClick,
-      'click .start-btn': this.onStartButtonClick
+      'click .start-btn': this.onStartButtonClick,
+      'click .restart-btn': this.onRestartButtonClick
     });
     this.updateCurrentStep();
   };
 
   this.updateCurrentStep = function () {
+    $(this.stepsContainer.find('li')).removeClass('highlighted');
     if (this.steps[this.currentStepIndex]) {
       this.currentStepNumberContainer.text('Step ' + (this.currentStepIndex + 1));
       this.currentStepTextContainer.text(this.steps[this.currentStepIndex]);
-      $(this.stepsContainer.find('li')).removeClass('highlighted');
       $(this.stepsContainer.find('li')[this.currentStepIndex]).addClass('highlighted');
     }
 
@@ -79,20 +83,24 @@ function RecipeViewer (options) {
 
   this.onDoneButtonClick = function () {
     this.currentStepIndex += 1;
-    this.currentStepNumberContainer.text('Done!');
-    this.currentStepTextContainer.text('');
-    this.currentStepContainer.addClass('complete');
-    this.setProgressBarPercentage(100);
-    this.doneButton.addClass('hidden');
-    this.stepsContainer.find('.highlighted').removeClass('highlighted');
-    this.scrollSteps();
+    this.stepsPanel.addClass('hidden');
+    this.donePanel.removeClass('hidden');
+    this.currentStepIndex = -1;
+    this.updateCurrentStep();
   };
 
   this.onStartButtonClick = function () {
     this.startButton.addClass('hidden');
-    this.currentStepContainer.removeClass('hidden');
-    this.recipeContainer.find('.recipe-meter-container').removeClass('hidden');
-    this.recipeContainer.find('.recipe-buttons').removeClass('hidden');
+    this.startRecipe();
+  };
+
+  this.onRestartButtonClick = function () {
+    this.donePanel.addClass('hidden');
+    this.startRecipe();
+  };
+
+  this.startRecipe = function () {
+    this.stepsPanel.removeClass('hidden');
     this.currentStepIndex += 1;
     this.updateCurrentStep();
   };

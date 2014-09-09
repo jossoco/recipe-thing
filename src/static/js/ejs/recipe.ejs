@@ -33,26 +33,32 @@
       <div class="start-panel">
         <span class="button start-btn">Start Recipe</span>
       </div>
+
+      <div class="done-panel hidden">
+        <span class="button restart-btn">Restart Recipe</span>
+      </div>
  
-      <div class="recipe-current-step hidden">
-        <h3 class="step-number"></h3>
-        <span class="step-image"></span>
-        <span class="step-text"></span>
-      </div>
-
-      <div class="recipe-meter-container hidden">
-        <div class="meter-label">
-          Progress:
+      <div class="steps-panel hidden">
+        <div class="recipe-current-step">
+          <h3 class="step-number"></h3>
+          <span class="step-image"></span>
+          <span class="step-text"></span>
         </div>
-        <div class="recipe-meter meter">
-          <span style="width: 0%"></span>
-        </div>
-      </div>
 
-      <div class="recipe-buttons hidden">
-        <span class="button back-btn">Back</span>
-        <span class="button next-btn">Next</span>
-        <span class="button done-btn hidden">Done</span>
+        <div class="recipe-meter-container">
+          <div class="meter-label">
+            Progress:
+          </div>
+          <div class="recipe-meter meter">
+            <span style="width: 0%"></span>
+          </div>
+        </div>
+
+        <div class="recipe-buttons">
+          <span class="button back-btn">Back</span>
+          <span class="button next-btn">Next</span>
+          <span class="button done-btn hidden">Done</span>
+        </div>
       </div>
     </div>
   </div>

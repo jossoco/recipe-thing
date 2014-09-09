@@ -67,10 +67,16 @@ html, body, .recipe {
   min-height: 70%;
 }
 
-.recipe-buttons.hidden,
-.recipe-meter-container.hidden,
-.recipe-current-step.hidden {
+.steps-panel {
+  height: 100%;
+}
+
+.steps-panel.hidden {
   visibility: hidden;
+}
+
+.done-panel.hidden {
+  display: none;
 }
 
 .recipe-title {
@@ -89,31 +95,6 @@ html, body, .recipe {
   font-size: 32px;
   display: inline-block;
   padding: 18px;
-}
-
-.step-image {
-  display: none;
-  background-image: url('/static/images/plate-and-utensils.png');
-  background-size: 100%;
-  background-repeat: no-repeat;
-  margin-top: 80px;
-  height: 220px;;
-  width: 325px;
-  opacity: 0.7;
-}
-
-.recipe-current-step.complete {
-  text-align: center;
-}
-
-.recipe-current-step.complete .step-text {
-  text-transform: uppercase;
-  text-align: center;
-  display: block;
-}
-
-.recipe-current-step.complete .step-image {
-  display: inline-block;
 }
 
 .recipe-buttons {
@@ -207,6 +188,7 @@ html, body, .recipe {
   text-align: center;
 }
 
+.restart-btn,
 .start-btn {
   width: 200px;
   height: 30px;
@@ -218,4 +200,9 @@ html, body, .recipe {
 
 .start-btn:hover {
   background-color: #D30C13;
+}
+
+.done-panel {
+  height: 100%;
+  text-align: center;
 }

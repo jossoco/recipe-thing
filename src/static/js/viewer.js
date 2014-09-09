@@ -27,6 +27,7 @@ function RecipeViewer (options) {
     this.progressBar = this.recipeContainer.find('.recipe-meter span');
     this.stepsPanel = this.recipeContainer.find('.steps-panel');
     this.donePanel = this.recipeContainer.find('.done-panel');
+    this.startPanel = this.recipeContainer.find('.start-panel');
 
     this.setPanelHeights();
     this.bindEvents({
@@ -90,7 +91,7 @@ function RecipeViewer (options) {
   };
 
   this.onStartButtonClick = function () {
-    this.startButton.addClass('hidden');
+    this.startPanel.addClass('hidden');
     this.startRecipe();
   };
 

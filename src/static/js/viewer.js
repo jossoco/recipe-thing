@@ -1,7 +1,5 @@
 function RecipeViewer (options) {
 
-  this.TEMPLATE_PATH = 'static/js/ejs/';
-  this.TEMPLATE_SUFFIX = '.ejs';
   this.TEMPLATE_NAME = 'recipe';
 
   this.init = function (options) {
@@ -26,28 +24,6 @@ function RecipeViewer (options) {
       'click .back-btn': this.onBackButtonClick
     });
     this.updateCurrentStep();
-  };
-
-  this.bindEvents = function (events) {
-    _.each(events, function (handler, event) {
-        var eventParts = event.split(' ');
-        var eventType = eventParts.shift();
-        var selector = '#' + this.id + ' ' + eventParts.join(' ');
-        $(selector).on(eventType, $.proxy(handler, this));
-    }, this);
-  };
-
-  this.getTemplateURL = function (templateName) {
-      return this.TEMPLATE_PATH + templateName + this.TEMPLATE_SUFFIX;
-  };
-
-  this.renderTemplate = function (templateName, options) {
-    var url = this.getTemplateURL(templateName);
-    return $(new EJS({url: url}).render(options));
-  };
-
-  this.render = function (options) {
-    $('body').append(this.renderTemplate(this.TEMPLATE_NAME, options));
   };
 
   this.updateCurrentStep = function () {
@@ -85,17 +61,5 @@ function RecipeViewer (options) {
   };
 };
 
-$(document).ready(function () {
-  //var imageUrl = 'http://d24edc7kaf4agn.cloudfront.net/1620905/67370600/how-to-saute-onions.jpg';
-  //var steps = ['Heat oil in skillet.', 'Add chopped onions.', 'Saute until translucent.'];
-
-  var options = {
-    id: 'test',
-    url: recipeData.url,
-    title: recipeData.title,
-    steps: recipeData.steps,
-    imageUrl: ''
-  };
-  var recipe = new RecipeViewer();
-  recipe.init(options);
-});
+RecipeViewer.prototype = new View();
+RecipeViewer.prototype.constructor = RecipeViewer;

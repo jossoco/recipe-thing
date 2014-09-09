@@ -57,6 +57,7 @@ function RecipeViewer (options) {
 
     var progressPercent = this.currentStepIndex / this.steps.length * 100;
     this.setProgressBarPercentage(progressPercent);
+    this.scrollSteps();
   };
 
   this.onNextButtonClick = function () {
@@ -81,6 +82,8 @@ function RecipeViewer (options) {
     this.currentStepContainer.addClass('complete');
     this.setProgressBarPercentage(100);
     this.doneButton.addClass('hidden');
+    this.stepsContainer.find('.highlighted').removeClass('highlighted');
+    this.scrollSteps();
   };
 
   this.setProgressBarPercentage = function (percentage) {
@@ -97,6 +100,20 @@ function RecipeViewer (options) {
     var headerHeight = this.headerContainer.height();
     this.bodyContainer.css('height', (recipeHeight - headerHeight - 10) + 'px');
   };
+
+  this.scrollSteps = function () {
+    var currentStepTop = 0;
+    var highlightedStep = this.stepsContainer.find('.highlighted');
+    if (highlightedStep.length > 0) {
+      currentStepTop = highlightedStep.position().top;
+    }
+    var list = this.stepsContainer.find('ol');
+    if (currentStepTop > 50) {
+      list.animate({'top': 0 - currentStepTop + 50 + 'px'});
+    } else {
+      list.animate({'top': '0px'});
+    }
+  }
 };
 
 RecipeViewer.prototype = new View();

@@ -36,18 +36,31 @@ html, body, .recipe {
 .recipe-steps,
 .recipe-current-step {
   background-color: #EEE;
-  padding: 10px;
   margin: 10px;
+  max-height: 50%;
+}
+
+.recipe-steps {
+  overflow: hidden;
 }
 
 .recipe-ingredients ul,
 .recipe-steps ol {
   font-family: 'Helvetica', sans-serif;
+  z-index: 1;
+}
+
+.recipe-steps-header {
+  height: 35px;
+  width: 100%;
+  position: relative;
+  z-index: 999;
 }
 
 .recipe-current-step {
   margin-left: 0;
   height: 70%;
+  min-height: 70%;
 }
 
 .recipe-title {
@@ -108,11 +121,12 @@ html, body, .recipe {
 
 .recipe-steps ol {
   margin: 8px 0 0 0;
+  position: relative;
 }
 
 .recipe-steps li {
   padding: 10px;
-  margin-left: -18px;
+  margin: 0 18px 0 0;
 }
 
 .highlighted {

@@ -10,15 +10,20 @@ function RecipeViewer (options) {
 
   this.start = function (options) {
     this.currentStepIndex = 0;
-    options.currentStep = options.steps[this.currentStepIndex];
     this.render(options);
 
-    var recipe = $('#' + this.id);
-    this.stepsContainer = recipe.find('.recipe-steps');
-    this.currentStepContainer = recipe.find('.recipe-current-step');
-    this.backButton = recipe.find('.back-btn');
-    this.nextButton = recipe.find('.next-btn');
+    this.recipeContainer = $('#' + this.id);
+    this.headerContainer = this.recipeContainer.find('.recipe-header');
+    this.bodyContainer = this.recipeContainer.find('.recipe-body');
+    this.stepsContainer = this.recipeContainer.find('.recipe-steps');
+    this.currentStepNumberContainer = this.recipeContainer.find('.recipe-current-step .step-number');
+    this.currentStepTextContainer = this.recipeContainer.find('.recipe-current-step .step-text');
+    this.backButton = this.recipeContainer.find('.back-btn');
+    this.nextButton = this.recipeContainer.find('.next-btn');
+    this.doneButton = this.recipeContainer.find('.done-btn');
+    this.progressBar = this.recipeContainer.find('.recipe-meter span');
 
+    this.setPanelHeights();
     this.bindEvents({
       'click .next-btn': this.onNextButtonClick,
       'click .back-btn': this.onBackButtonClick
@@ -28,15 +33,15 @@ function RecipeViewer (options) {
 
   this.updateCurrentStep = function () {
     if (this.steps[this.currentStepIndex]) {
-      this.currentStepContainer.text(this.steps[this.currentStepIndex]);
+      this.currentStepNumberContainer.text('Step ' + (this.currentStepIndex + 1));
+      this.currentStepTextContainer.text(this.steps[this.currentStepIndex]);
       $(this.stepsContainer.find('li')).removeClass('highlighted');
       $(this.stepsContainer.find('li')[this.currentStepIndex]).addClass('highlighted');
     }
 
-    if (!this.steps[this.currentStepIndex + 1]) {
-      this.nextButton.addClass('disabled');
-    } else {
-      this.nextButton.removeClass('disabled');
+    if (this.currentStepIndex === this.steps.length) {
+      this.nextButton.hide();
+      this.doneButton.show();
     }
 
     if (!this.steps[this.currentStepIndex - 1]) {
@@ -44,6 +49,9 @@ function RecipeViewer (options) {
     } else {
       this.backButton.removeClass('disabled');
     }
+
+    var progress = this.currentStepIndex / this.steps.length * 100;
+    this.progressBar.css('width', progress + '%');
   };
 
   this.onNextButtonClick = function () {
@@ -58,6 +66,12 @@ function RecipeViewer (options) {
       this.currentStepIndex -= 1;
       this.updateCurrentStep();
     }
+  };
+
+  this.setPanelHeights = function () {
+    var recipeHeight = this.recipeContainer.height();
+    var headerHeight = this.headerContainer.height();
+    this.bodyContainer.css('height', (recipeHeight - headerHeight - 10) + 'px');
   };
 };
 

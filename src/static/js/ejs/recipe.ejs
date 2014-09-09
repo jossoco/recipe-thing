@@ -1,22 +1,47 @@
 <div id="<%= id %>" class="recipe">
-  <div class="recipe-image" style="background-image: url('<%= imageUrl %>')"></div>
-  <div class="recipe-title"><%= title %></div>
-  <div class="recipe-source">Source: <a href="<%= url %>"><%= sourceName %></a></div>
-
-  <div class="recipe-steps">
-    <ol>
-      <% _.each(steps, function (step) { %>
-        <li><%= step %></li>
-      <% }) %>
-    </ol>
+  <div class="recipe-header">
+    <div class="recipe-image" style="background-image: url('<%= imageUrl %>')"></div>
+    <h1 class="recipe-title"><%= title %></h1>
+    <h2 class="recipe-source">Source: <a href="<%= url %>"><%= sourceName %></a></h2>
   </div>
 
-  <div class="recipe-current-step">
-    <%= currentStep %>
-  </div>
+  <div class="recipe-body">
+    <div class="recipe-panel">
+      <div class="recipe-ingredients">
+        <h3>Ingredients</h3>
+        <ul>
+          <% _.each(ingredients, function (ingredient) { %>
+            <li><%= ingredient %></li>
+          <% }) %>
+        </ul>
+      </div>
 
-  <div class="recipe-buttons">
-    <span class="button back-btn">Back</span>
-    <span class="button next-btn">Next</span>
+      <div class="recipe-steps">
+        <h3>Instructions</h3>
+        <ol>
+          <% _.each(steps, function (step) { %>
+            <li><%= step %></li>
+          <% }) %>
+        </ol>
+      </div>
+    </div>
+
+    <div class="recipe-panel">
+ 
+      <div class="recipe-current-step">
+        <h3 class="step-number"></h3>
+        <span class="step-text"></span>
+      </div>
+
+      <div class="recipe-meter meter">
+        <span style="width: 25%"></span>
+      </div>
+
+      <div class="recipe-buttons">
+        <span class="button back-btn">Back</span>
+        <span class="button next-btn">Next</span>
+        <span class="button done-btn">Done</span>
+      </div>
+    </div>
   </div>
 </div>

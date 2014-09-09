@@ -5,6 +5,7 @@ $(document).ready(function () {
       url: recipeData.url,
       sourceName: recipeData.sourceName,
       title: recipeData.title,
+      ingredients: recipeData.ingredients,
       steps: recipeData.steps,
       imageUrl: ''
     };

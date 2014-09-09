@@ -21,21 +21,20 @@ def _parse(content):
     soup = BeautifulSoup(content)
     data = {}
     data['title'], data['sourceName'] = _parseTitle(soup.title.string)
-    data['steps'] = _parseSteps(soup)
+    data['steps'] = _parseTextList(soup, "instruction")
+    data['ingredients'] = _parseTextList(soup, "ingredient")
     return data
 
 def _parseTitle(title):
     parts = title.split(' - ')
     return (parts[0], parts[1])
 
-def _parseSteps(soup):
-    steps = []
-
-    # Look for recipe tags
-    instr_els = soup.find_all(class_="instruction")
-    for el in instr_els:
-        steps.append(el.get_text())
-    return steps
+def _parseTextList(soup, class_name):
+    list = []
+    els = soup.find_all(class_=class_name)
+    for el in els:
+        list.append(el.get_text())
+    return list
 
 
 if __name__ == "__main__":

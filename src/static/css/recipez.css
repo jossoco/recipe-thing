@@ -1,34 +1,67 @@
-body {
-  font-family: 'Railway', sans-serif;
+html, body, .recipe {
+  height: 100%;
 }
 
-.recipe-steps,
-.recipe-current-step,
-.recipe-buttons {
-  width: 45%;
+.recipe {
+  font-family: 'Raleway', sans-serif;
+  font-family: 'Lato', sans-serif;
+}
+
+.recipe-header {
+  height: 15%;
+}
+
+.recipe-panel {
+  width: 50%;
+  height: 100%;
   float: left;
+  font-size: 13px;
+}
+
+.recipe-panel h3 {
+  margin: 0;
+  font-size: 16px;
+  text-transform: uppercase;
+  background-color: #4FB5B3;
+  padding: 2px;
+  text-align: center;
+  color: #EEE;
+}
+
+.recipe-panel h3.step-number {
+  background-color: #A81D22;
+}
+
+.recipe-ingredients,
+.recipe-steps,
+.recipe-current-step {
+  background-color: #EEE;
+  padding: 10px;
+  margin: 10px;
 }
 
 .recipe-current-step {
-  margin-left: 18px;
-  height: 400px;
-  font-size: 24px;
+  margin-left: 0;
+  height: 70%;
 }
 
 .recipe-title {
-  font-family: 'Roboto Slab', serif;
-  font-size: 28px;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
   text-transform: uppercase;
-  padding-left: 18px;
 }
 
-.recipe-source {
-  padding-left: 18px;
-  margin-bottom: 24px;
+.step-text {
+  font-size: 32px;
+  display: inline-block;
+  padding: 18px;
 }
 
 .recipe-buttons {
   text-align: center;
+}
+
+.done-btn {
+  display: none;
 }
 
 .recipe-steps ol {
@@ -36,14 +69,14 @@ body {
 }
 
 .recipe-steps li {
-  margin-bottom: 18px;
   padding: 10px;
+  margin-left: -18px;
 }
 
 .highlighted {
   font-weight: bold;
   border: 1px dashed #666;
-  background-color: #C2F5CE;
+  background-color: #CCC;
 }
 
 .recipe-image {
@@ -62,7 +95,7 @@ body {
   display: inline-block;
   cursor: pointer;
   padding: 10px;
-  color: #FFF;
+  color: #EEE;
   font-size: 16px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -79,4 +112,14 @@ body {
 .button.disabled {
   background-color: #AAA;
   cursor: default;
+}
+
+.recipe-meter {
+  height: 28px;
+  background-color: #EEE;
+  padding: 6px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  margin-right: 10px;
 }

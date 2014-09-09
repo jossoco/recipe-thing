@@ -84,7 +84,7 @@ function RecipeViewer (options) {
   };
 
   this.setProgressBarPercentage = function (percentage) {
-    this.progressBar.css('width', percentage + '%');
+    this.progressBar.animate({'width': percentage + '%'});
     if (parseInt(100) === percentage) {
       this.progressBar.addClass('complete');
     } else {

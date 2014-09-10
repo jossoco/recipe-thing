@@ -26,9 +26,11 @@ def recipe():
         data = parse_recipe(res.read())
         data['url'] = url
         return render_template('recipe.html', data=json.dumps(data))
-    except Exception as e:
-        session['error'] = "Bad URL"
+    except urllib2.HTTPError as httpError:
+        session['error'] = "URL Error"
         return redirect(url_for('form'))
+    except Exception as exc:
+        raise(exc)
 
 @app.route('/form', methods=['GET', 'POST'])
 def form():

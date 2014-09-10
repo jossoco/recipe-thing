@@ -187,8 +187,11 @@ html, body, .recipe {
 
 .start-panel {
   text-align: center;
-  background-image: url('http://www.culinaryhill.com/wp-content/uploads/2014/02/rice-1-IMG_2695.jpg');
   height: 100%;
+  background-position-y: 50%;
+  background-position-x: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .restart-btn,

@@ -7,8 +7,8 @@ html, body, .recipe {
   font-family: 'Lato', sans-serif;
 }
 
-.recipe-header {
-  height: 12%;
+.recipe-body {
+  padding-top: 10px;
 }
 
 .recipe-panel {

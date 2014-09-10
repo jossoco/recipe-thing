@@ -122,7 +122,7 @@ function RecipeViewer (options) {
   this.setPanelHeights = function () {
     var recipeHeight = this.recipeContainer.height();
     var headerHeight = this.headerContainer.height();
-    var bodyHeight = recipeHeight - headerHeight - 50;
+    var bodyHeight = recipeHeight - headerHeight - 60;
     this.bodyContainer.css('height', bodyHeight + 'px');
 
     var buttonTop = bodyHeight / 2 - 50;

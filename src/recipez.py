@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for
 from recipe.parser import parse_recipe
 import urllib2
 import json
+import os
 
 app = Flask(__name__)
 session = {
@@ -24,8 +25,12 @@ def recipe():
         req.add_header('User-Agent', 'Recipe/1.0 +https://github.com/jossoco/recipe-thing')
         res = res.open = urllib2.urlopen(req)
         data = parse_recipe(res.read())
-        data['url'] = url
-        return render_template('recipe.html', data=json.dumps(data))
+        if os.environ.get('DEBUG') or len(data['steps']) > 0:
+            data['url'] = url
+            return render_template('recipe.html', data=json.dumps(data))
+        else:
+            session['error'] = "Recipe could not be read"
+            return redirect(url_for('form'))
     except urllib2.HTTPError as httpError:
         session['error'] = "URL Error"
         return redirect(url_for('form'))

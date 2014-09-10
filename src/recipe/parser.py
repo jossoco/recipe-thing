@@ -1,29 +1,29 @@
 from bs4 import BeautifulSoup
+from exceptions import AttributeError
 
 class RecipeParser():
 
     def parse_data(self, input):
         soup = BeautifulSoup(input)
         data = {}
-
-        title_parts = self._parseTitle(soup.title.string)
-        if type(title_parts) is tuple:
-            data['title'], data['sourceName'] = self._parseTitle(soup.title.string)
-        else:
-            data['title'] = title_parts
-            data['sourceName'] = ''
-
-        data['steps'] = self._parseTextList(soup, "instruction")
-        data['ingredients'] = self._parseTextList(soup, "ingredient")
+        data['title'], data['sourceName'] = self._parse_title_and_source(soup)
+        data['steps'] = self._parse_text_list(soup, "instruction")
+        data['ingredients'] = self._parse_text_list(soup, "ingredient")
         return data
 
-    def _parseTitle(self, title):
+    def _parse_title_and_source(self, soup):
+        try:
+            title = soup.title.string
+        except AttributeError:
+            title = ''
+
         parts = title.split(' - ')
         if len(parts) == 2:
             return (parts[0], parts[1])
-        return title
+        else:
+            return (title, '')
 
-    def _parseTextList(self, soup, class_name):
+    def _parse_text_list(self, soup, class_name):
         list = []
         els = soup.find_all(class_=class_name)
         for el in els:

@@ -84,10 +84,14 @@ function RecipeViewer (options) {
 
   this.onDoneButtonClick = function () {
     this.currentStepIndex += 1;
-    this.stepsPanel.addClass('hidden');
-    this.donePanel.removeClass('hidden');
-    this.currentStepIndex = -1;
     this.updateCurrentStep();
+    var self = this;
+    setTimeout(function () {
+      self.stepsPanel.addClass('hidden');
+      self.donePanel.removeClass('hidden');
+      self.currentStepIndex = -1;
+      self.updateCurrentStep();
+    }, 800);
   };
 
   this.onStartButtonClick = function () {

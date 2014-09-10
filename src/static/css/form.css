@@ -1,0 +1,52 @@
+body, #recipe-prompt {
+  height: 100%;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+#recipe-prompt {
+  text-align: center;
+  width: 100%;
+}
+
+.recipe-form {
+  height: 300px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.recipe-form div {
+  padding-bottom: 18px;
+}
+
+.input-label {
+  font-size: 36px;
+  text-transform: uppercase;
+}
+
+input {
+  width: 600px;
+  height: 50px;
+  font-size: 32px;
+}
+
+button {
+  width: 200px;
+  height: 50px;
+  font-size: 24px;
+  text-transform: uppercase;
+  background-color: #A81D22;
+  border: none;
+  color: #EEE;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #D30C13;
+}

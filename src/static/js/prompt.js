@@ -3,6 +3,7 @@ function RecipePrompt () {
   this.TEMPLATE_NAME = 'prompt';
 
   this.init = function (options) {
+    this.id = 'recipe-prompt';
     this.start(options);
   };
 

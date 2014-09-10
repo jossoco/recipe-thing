@@ -44,7 +44,6 @@ html, body, .recipe {
 .recipe-current-step {
   background-color: #EEE;
   margin: 0 10px 0 10px;
-  max-height: 50%;
 }
 
 .recipe-steps {

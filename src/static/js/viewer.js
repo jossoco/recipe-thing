@@ -118,7 +118,12 @@ function RecipeViewer (options) {
   this.setPanelHeights = function () {
     var recipeHeight = this.recipeContainer.height();
     var headerHeight = this.headerContainer.height();
-    this.bodyContainer.css('height', (recipeHeight - headerHeight - 10) + 'px');
+    var bodyHeight = recipeHeight - headerHeight - 10;
+    this.bodyContainer.css('height', bodyHeight + 'px');
+
+    var buttonTop = bodyHeight / 2 - 50;
+    this.startButton.css('margin-top', buttonTop + 'px');
+    this.restartButton.css('margin-top', buttonTop + 'px');
   };
 
   this.scrollSteps = function () {

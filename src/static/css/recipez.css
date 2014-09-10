@@ -43,7 +43,7 @@ html, body, .recipe {
 .recipe-steps,
 .recipe-current-step {
   background-color: #EEE;
-  margin: 10px;
+  margin: 0 10px 0 10px;
   max-height: 50%;
 }
 
@@ -197,7 +197,6 @@ html, body, .recipe {
   height: 30px;
   font-size: 24px;
   text-transform: uppercase;
-  margin-top: 35%;
   background-color: #A81D22;
 }
 

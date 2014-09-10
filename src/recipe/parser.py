@@ -27,7 +27,9 @@ class RecipeParser():
         list = []
         els = soup.find_all(class_=class_name)
         for el in els:
-            list.append(el.get_text())
+            text = el.get_text()
+            if text.strip() != '':
+                list.append(text)
         return list
 
 

@@ -1,1 +1,10 @@
-<div>PROMPT</div>
+<% if (error) { %>
+  <div class="error"><%= error %></div>
+<% } %>
+
+<div id="recipe-prompt">
+  <form method="post">
+    <div>Enter Recipe URL:</div>
+    <input type="text" name="url">
+  </form>
+</div>

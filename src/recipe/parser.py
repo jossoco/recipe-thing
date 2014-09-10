@@ -9,7 +9,7 @@ class RecipeParser():
 
         title_parts = self._parseTitle(soup.title.string)
         if type(title_parts) is tuple:
-            data['title'], data['sourceName'] = _parseTitle(soup.title.string)
+            data['title'], data['sourceName'] = self._parseTitle(soup.title.string)
         else:
             data['title'] = title_parts
             data['sourceName'] = ''

@@ -23,6 +23,6 @@ function View () {
 
   this.render = function (options) {
     options = options || {};
-    $('body').append(this.renderTemplate(this.TEMPLATE_NAME, options));
+    $('body').html(this.renderTemplate(this.TEMPLATE_NAME, options));
   };
 };

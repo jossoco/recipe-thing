@@ -27,7 +27,7 @@ class RecipeParser():
         parts = title.split(' | ')
         if len(parts) == 2:
             return (parts[0], parts[1])
-            
+
         return (title, '')
 
     def _parse_text_list(self, soup, class_name):

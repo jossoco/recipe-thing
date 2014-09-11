@@ -40,7 +40,7 @@ function RecipeViewer (options) {
     this.updateCurrentStep();
   };
 
-  this.updateCurrentStep = function () {
+  this.updateCurrentStep = function (animationCallback) {
     $(this.stepsContainer.find('li')).removeClass('highlighted');
     if (this.steps[this.currentStepIndex]) {
       this.currentStepNumberContainer.text('Step ' + (this.currentStepIndex + 1));
@@ -63,7 +63,7 @@ function RecipeViewer (options) {
     }
 
     var progressPercent = this.currentStepIndex / this.steps.length * 100;
-    this.setProgressBarPercentage(progressPercent);
+    this.setProgressBarPercentage(progressPercent, animationCallback);
     this.scrollSteps();
   };
 
@@ -83,15 +83,15 @@ function RecipeViewer (options) {
   };
 
   this.onDoneButtonClick = function () {
-    this.currentStepIndex += 1;
-    this.updateCurrentStep();
     var self = this;
-    setTimeout(function () {
+    var animationCallback = function () {
       self.stepsPanel.addClass('hidden');
       self.donePanel.removeClass('hidden');
       self.currentStepIndex = -1;
       self.updateCurrentStep();
-    }, 800);
+    };
+    this.currentStepIndex += 1;
+    this.updateCurrentStep(animationCallback);
   };
 
   this.onStartButtonClick = function () {
@@ -110,8 +110,13 @@ function RecipeViewer (options) {
     this.updateCurrentStep();
   };
 
-  this.setProgressBarPercentage = function (percentage) {
-    this.progressBar.animate({'width': percentage + '%'});
+  this.setProgressBarPercentage = function (percentage, callback) {
+    this.progressBar.animate({'width': percentage + '%'}, 700, function () {
+      if (callback) {
+        callback()
+      }
+    });
+
     if (parseInt(100) === percentage) {
       this.progressBar.addClass('complete');
     } else {

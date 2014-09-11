@@ -130,7 +130,7 @@ function RecipeViewer (options) {
     this.restartButton.css('margin-top', buttonTop + 'px');
 
     var ingredientsHeight = this.recipeContainer.find('.recipe-ingredients').height();
-    var stepsHeight = bodyHeight - ingredientsHeight;
+    var stepsHeight = bodyHeight - ingredientsHeight - 13;
     this.stepsContainer.css('height', stepsHeight + 'px');
   };
 

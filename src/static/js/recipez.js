@@ -6,7 +6,7 @@ $(document).ready(function () {
     title: recipeData.title,
     ingredients: recipeData.ingredients,
     steps: recipeData.steps,
-    imageUrl: ''
+    imageUrl: recipeData.imageUrl
   };
   var recipe = new RecipeViewer();
   recipe.init(options);

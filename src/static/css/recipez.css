@@ -109,6 +109,7 @@ html, body, .recipe {
 
 .button.done-btn {
   background-color: #A81D22;
+  margin-top: 6px;
 }
 
 .button.done-btn:hover {

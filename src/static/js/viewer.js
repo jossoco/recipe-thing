@@ -18,6 +18,7 @@ function RecipeViewer (options) {
     this.stepsContainer = this.recipeContainer.find('.recipe-steps');
     this.currentStepNumberContainer = this.recipeContainer.find('.step-number');
     this.currentStepTextContainer = this.recipeContainer.find('.step-text');
+    this.buttons = this.recipeContainer.find('.recipe-buttons');
     this.backButton = this.recipeContainer.find('.back-btn');
     this.nextButton = this.recipeContainer.find('.next-btn');
     this.doneButton = this.recipeContainer.find('.done-btn');
@@ -45,10 +46,10 @@ function RecipeViewer (options) {
     }
 
     if (this.currentStepIndex + 1 === this.steps.length) {
-      this.hideElement(this.nextButton);
+      this.nextButton.addClass('disabled');
       this.showElement(this.doneButton);
     } else {
-      this.showElement(this.nextButton);
+      this.nextButton.removeClass('disabled');
       this.hideElement(this.doneButton);
     }
 
@@ -82,10 +83,12 @@ function RecipeViewer (options) {
     var animationCallback = function () {
       self.hideElement(self.stepsPanel);
       self.showElement(self.startPanel);
+      self.showElement(self.buttons);
       self.startButton.text('Restart Recipe');
       self.currentStepIndex = -1;
       self.updateCurrentStep();
     };
+    this.hideElement(this.buttons);
     this.currentStepIndex += 1;
     this.updateCurrentStep(animationCallback);
   };

@@ -32,8 +32,7 @@ function RecipeViewer (options) {
       'click .next-btn': this.onNextButtonClick,
       'click .back-btn': this.onBackButtonClick,
       'click .done-btn': this.onDoneButtonClick,
-      'click .start-btn': this.onStartButtonClick,
-      'click .restart-btn': this.onRestartButtonClick
+      'click .start-btn': this.onStartButtonClick
     });
     this.updateCurrentStep();
   };
@@ -96,11 +95,6 @@ function RecipeViewer (options) {
   };
 
   this.onStartButtonClick = function () {
-    this.startPanel.addClass('hidden');
-    this.startRecipe();
-  };
-
-  this.onRestartButtonClick = function () {
     this.startPanel.addClass('hidden');
     this.startRecipe();
   };

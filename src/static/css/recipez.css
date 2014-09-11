@@ -207,8 +207,3 @@ html, body, .recipe {
 .start-btn:hover {
   background-color: #D30C13;
 }
-
-.done-panel {
-  height: 100%;
-  text-align: center;
-}

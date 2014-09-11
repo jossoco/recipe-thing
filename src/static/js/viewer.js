@@ -23,10 +23,8 @@ function RecipeViewer (options) {
     this.nextButton = this.recipeContainer.find('.next-btn');
     this.doneButton = this.recipeContainer.find('.done-btn');
     this.startButton = this.recipeContainer.find('.start-btn');
-    this.restartButton = this.recipeContainer.find('.restart-btn');
     this.progressBar = this.recipeContainer.find('.recipe-meter span');
     this.stepsPanel = this.recipeContainer.find('.steps-panel');
-    this.donePanel = this.recipeContainer.find('.done-panel');
     this.startPanel = this.recipeContainer.find('.start-panel');
 
     this.setPanelHeights();
@@ -86,7 +84,10 @@ function RecipeViewer (options) {
     var self = this;
     var animationCallback = function () {
       self.stepsPanel.addClass('hidden');
-      self.donePanel.removeClass('hidden');
+
+      self.startButton.text('Restart Recipe');
+      self.startPanel.removeClass('hidden');
+
       self.currentStepIndex = -1;
       self.updateCurrentStep();
     };
@@ -100,7 +101,7 @@ function RecipeViewer (options) {
   };
 
   this.onRestartButtonClick = function () {
-    this.donePanel.addClass('hidden');
+    this.startPanel.addClass('hidden');
     this.startRecipe();
   };
 
@@ -132,7 +133,6 @@ function RecipeViewer (options) {
 
     var buttonTop = bodyHeight / 2 - 50;
     this.startButton.css('margin-top', buttonTop + 'px');
-    this.restartButton.css('margin-top', buttonTop + 'px');
 
     var ingredientsHeight = this.recipeContainer.find('.recipe-ingredients').height();
     var stepsHeight = bodyHeight - ingredientsHeight - 13;

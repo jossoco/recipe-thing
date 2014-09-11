@@ -14,14 +14,20 @@ class RecipeParser():
     def _parse_title_and_source(self, soup):
         try:
             title = soup.title.string
+            if title is None:
+                title = ''
         except AttributeError:
             title = ''
 
         parts = title.split(' - ')
         if len(parts) == 2:
             return (parts[0], parts[1])
-        else:
-            return (title, '')
+
+        parts = title.split(' | ')
+        if len(parts) == 2:
+            return (parts[0], parts[1])
+            
+        return (title, '')
 
     def _parse_text_list(self, soup, class_name, item_props):
         list = []

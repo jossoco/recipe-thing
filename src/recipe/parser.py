@@ -38,7 +38,7 @@ class RecipeParser():
             child_els = []
             for item_prop in item_props:
                 els = soup.find_all(attrs={'itemprop': item_prop})
-                if len(els) == 0:
+                if len(els) == 1:
                     child_type = None
                     for c in els[0].contents:
                         if c.name:
@@ -47,9 +47,12 @@ class RecipeParser():
                                 child_els.append(c)
                             elif c.name == child_type:
                                 child_els.append(c)
+                else:
+                    child_els = els
+
+                if len(child_els) > 0:
+                    els = child_els
                     break
-            if len(child_els) > 0:
-                els = child_els
 
         for el in els:
             text = el.get_text()

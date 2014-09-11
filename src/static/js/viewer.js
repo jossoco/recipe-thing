@@ -45,11 +45,11 @@ function RecipeViewer (options) {
     }
 
     if (this.currentStepIndex + 1 === this.steps.length) {
-      this.nextButton.addClass('hidden');
-      this.doneButton.removeClass('hidden');
+      this.hideElement(this.nextButton);
+      this.showElement(this.doneButton);
     } else {
-      this.nextButton.removeClass('hidden');
-      this.doneButton.addClass('hidden');
+      this.showElement(this.nextButton);
+      this.hideElement(this.doneButton);
     }
 
     if (!this.steps[this.currentStepIndex - 1]) {
@@ -80,11 +80,9 @@ function RecipeViewer (options) {
   this.onDoneButtonClick = function () {
     var self = this;
     var animationCallback = function () {
-      self.stepsPanel.addClass('hidden');
-
+      self.hideElement(self.stepsPanel);
+      self.showElement(self.startPanel);
       self.startButton.text('Restart Recipe');
-      self.startPanel.removeClass('hidden');
-
       self.currentStepIndex = -1;
       self.updateCurrentStep();
     };
@@ -93,12 +91,12 @@ function RecipeViewer (options) {
   };
 
   this.onStartButtonClick = function () {
-    this.startPanel.addClass('hidden');
+    this.hideElement(this.startPanel);
     this.startRecipe();
   };
 
   this.startRecipe = function () {
-    this.stepsPanel.removeClass('hidden');
+    this.showElement(this.stepsPanel);
     this.currentStepIndex += 1;
     this.updateCurrentStep();
   };

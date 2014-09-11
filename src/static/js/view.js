@@ -25,4 +25,12 @@ function View () {
     options = options || {};
     $('body').html(this.renderTemplate(this.TEMPLATE_NAME, options));
   };
+
+  this.hideElement = function (element) {
+    $(element).addClass('hidden');
+  };
+
+  this.showElement = function (element) {
+    $(element).removeClass('hidden');
+  };
 };

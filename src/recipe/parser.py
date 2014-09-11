@@ -40,23 +40,39 @@ class RecipeParser():
         return list
 
     def _parse_image(self, soup):
+        tagged_images = soup.find_all(attrs={'itemprop': 'image'})
+        if len(tagged_images) == 1 and 'src' in tagged_images[0].attrs:
+            return tagged_images[0].attrs['src']
+
         images = soup.find_all('img')
-        image_src = ''
         if len(images) > 1:
             target_image = ''
-            max_width = 0
+            max_area = 0
             for image in images:
-                if image.attrs and 'width' in image.attrs and image.attrs['width'] != '':
-                    width = int(image.attrs['width'].replace('px', '').replace(';', '').replace(':', ''))
-                    if width > max_width:
-                        max_width = width
-                        target_image = image
+                area = self._get_image_area(image)
+                if area > max_area:
+                    max_area = area
+                    target_image = image
             if target_image and 'src' in target_image.attrs:
-                print target_image
-                image_src = target_image.attrs['src']
+                return target_image.attrs['src']
         elif len(images) == 1 and 'src' in images[0].attrs:
-            image_src = images[0].attrs['src']
-        return image_src
+            return images[0].attrs['src']
+        return ''
+
+    def _get_image_area(self, image):
+        if image.attrs and 'width' in image.attrs and 'height' in image.attrs:
+            width = self._get_int(image.attrs['width'])
+            height = self._get_int(image.attrs['height'])
+            return width * height
+        return 0
+
+    def _get_int(self, attr):
+        for char in ['px', '%', ';', ':']:
+            attr = attr.replace(char, '')
+        try:
+            return int(attr)
+        except:
+            return 0
 
 
 def parse_recipe(input):

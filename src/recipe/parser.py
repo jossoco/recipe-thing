@@ -46,8 +46,8 @@ class RecipeParser():
             target_image = ''
             max_width = 0
             for image in images:
-                if image.attrs and 'width' in image.attrs:
-                    width = int(image.attrs['width'].replace('px', '').replace(';', ''))
+                if image.attrs and 'width' in image.attrs and image.attrs['width'] != '':
+                    width = int(image.attrs['width'].replace('px', '').replace(';', '').replace(':', ''))
                     if width > max_width:
                         max_width = width
                         target_image = image

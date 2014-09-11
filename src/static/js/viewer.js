@@ -16,9 +16,8 @@ function RecipeViewer (options) {
     this.headerContainer = this.recipeContainer.find('.recipe-header');
     this.bodyContainer = this.recipeContainer.find('.recipe-body');
     this.stepsContainer = this.recipeContainer.find('.recipe-steps');
-    this.currentStepContainer = this.recipeContainer.find('.recipe-current-step');
-    this.currentStepNumberContainer = this.currentStepContainer.find('.step-number');
-    this.currentStepTextContainer = this.currentStepContainer.find('.step-text');
+    this.currentStepNumberContainer = this.recipeContainer.find('.step-number');
+    this.currentStepTextContainer = this.recipeContainer.find('.step-text');
     this.backButton = this.recipeContainer.find('.back-btn');
     this.nextButton = this.recipeContainer.find('.next-btn');
     this.doneButton = this.recipeContainer.find('.done-btn');
@@ -75,7 +74,6 @@ function RecipeViewer (options) {
     if (!this.backButton.hasClass('disabled')) {
       this.currentStepIndex -= 1;
       this.updateCurrentStep();
-      this.currentStepContainer.removeClass('complete');
     }
   };
 

@@ -21,8 +21,14 @@ class RecipeParser():
                 soup.find(class_='post-footer').decompose()
             if soup.find(class_='nav'):
                 soup.find(class_='nav').decompose()
+
+            def is_empty(text):
+                return len(text.strip()) == 0
+            [s.extract() for s in soup.find_all(text=is_empty)]
+
             [s.extract() for s in soup('script')]
             [s.extract() for s in soup('img')]
+
             html_str = str(soup)
             data['allText'] = html_str
 

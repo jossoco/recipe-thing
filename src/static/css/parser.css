@@ -5,6 +5,7 @@ body, #recipe-form {
 body {
   font-family: 'Lato', sans-serif;
   margin: 0;
+  background-color: #CCC;
 }
 
 #recipe-panel {
@@ -16,38 +17,68 @@ body {
   position: relative;
   top: 100px;
   z-index: 1;
+  background-color: #FFF;
+  font-family: 'Helvetica', sans-serif;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 #recipe-parser-header {
   width: 100%;
   height: 80px;
   text-align: center;
-  background-color: #A81D22;
-  color: #EEE;
-  padding: 8px;
   position: fixed;
   z-index: 2;
+  background-color: #EEE;
+  border-bottom: 2px solid #BBB;
 }
 
 #recipe-parser-header h1 {
   font-size: 32px;
   text-transform: uppercase;
   margin: 0;
-  padding-bottom: 12px;
+  color: #A81D22;
+}
+
+#recipe-parser-header .header {
+  padding: 8px;
+}
+
+#recipe-parser-header .directions {
+  color: #444;
 }
 
 #parse-widget {
-  width: 200px;
+  width: 215px;
   position: fixed;
   background-color: #EEE;
-  padding: 12px;
-  top: 20px;
+  top: 120px;
   right: 20px;
   z-index: 2;
+  color: #444;
+  
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#parse-widget .header {
+  background-color: #2A9AAE;
+  color: #EEE;
+  padding: 4px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#parse-widget .content {
+  padding: 12px;
 }
 
 .button {
   margin: 18px 4px 4px 4px;
+  padding: 10px 8px;
 }
 
 .user-text {
@@ -65,7 +96,7 @@ body {
   padding: 8px 0;
   margin: 8px 0;
   min-height: 20px;
-  max-height: 350px;
+  max-height: 250px;
   overflow-y: scroll;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;

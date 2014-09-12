@@ -1,19 +1,27 @@
 <div id="recipe-parser">
 
 <div id="recipe-parser-header">
-  <h1>Recipe Creator</h1>
-  <span>Use the dialogs to create the recipe.</span>
+  <div class="header">
+    <h1>Recipe Editor</h1>
+  </div>
+  <span class="directions">
+    The original recipe content is displayed below. Use the dialogs on the right to select and edit the different parts of the
+    recipe.
+  </span>
 </div>
 
 <div id="parse-widget">
-  Highlight <%= type %>, then click the <span class="highlight">Add</span> button. When all <%= type %> have been selection,
-  click the <span class="highlight">Next</span> button to continue.
+  <div class="header"><%= type %></div>
+  <div class="content">
+    Highlight <%= type %>, then click the <span class="highlight">Add</span> button. When all <%= type %> have been selection,
+    click the <span class="highlight">Next</span> button to continue.
 
-  <div class="label">Selected <%= type %>:</div>
-  <div class="widget-contents"></div>
-  <div class="buttons">
-    <span class="button add-btn disabled">Add</span>
-    <span class="button next-btn disabled">Next</span>
+    <div class="label">Selected <%= type %>:</div>
+    <div class="widget-contents"></div>
+    <div class="buttons">
+      <span class="button add-btn disabled">Add</span>
+      <span class="button next-btn disabled">Next</span>
+    </div>
   </div>
 </div>
 

@@ -21,6 +21,8 @@ class RecipeParser():
                 soup.find(class_='post-footer').decompose()
             if soup.find(class_='nav'):
                 soup.find(class_='nav').decompose()
+            if soup.find(id='comments'):
+                soup.find(id='comments').decompose()
 
             def is_empty(text):
                 return len(text.strip()) == 0
@@ -28,6 +30,7 @@ class RecipeParser():
 
             [s.extract() for s in soup('script')]
             [s.extract() for s in soup('img')]
+            [s.extract() for s in soup('form')]
 
             html_str = str(soup)
             data['allText'] = html_str

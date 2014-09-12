@@ -7,12 +7,16 @@ function RecipeParser () {
     this.id = 'recipe-parser';
     this.currentStepIndex = 0;
     this.ingredients = [];
+
+    rangy.init();
     this.start(options);
   };
 
   this.start = function (options) {
     options.type = this.PARSING_TYPES[this.currentStepIndex];
     this.render(options);
+
+    this.cssApplier = rangy.createCssClassApplier('highlighted', {normalize: true});
 
     this.nextButton = $('#' + this.id + ' .next-btn');
     this.addButton = $('#' + this.id + ' .add-btn');
@@ -48,6 +52,7 @@ function RecipeParser () {
     if (this.widgetContents.find('li').length > 0) {
       this.nextButton.removeClass('disabled');
     }
+    this.cssApplier.toggleSelection();
     this.deselectText();
   };
 

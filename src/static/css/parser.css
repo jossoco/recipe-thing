@@ -60,3 +60,7 @@ body {
   padding: 0 8px;
   -webkit-border-radius: 20px;
 }
+
+.highlighted {
+  background-color: #FFFA70;
+}

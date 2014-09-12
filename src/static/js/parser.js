@@ -52,8 +52,11 @@ function RecipeParser () {
     if (this.widgetContents.find('li').length > 0) {
       this.nextButton.removeClass('disabled');
     }
-    this.cssApplier.toggleSelection();
+    this.cssApplier.applyToSelection();
     this.deselectText();
+    this.bindEvents({
+      'click #parse-widget li': this.onListItemClick
+    });
   };
 
   this.getHighlightedText = function () {
@@ -91,6 +94,16 @@ function RecipeParser () {
       list.append(renderedIngredients.find('li'));
     } else {
       this.widgetContents.append(renderedIngredients);
+    }
+  };
+
+  this.onListItemClick = function (event) {
+    var target = $(event.target);
+    var text = target.text();
+    var confirmed = confirm('Remove ingredient "' + text + '"?');
+    if (confirmed) {
+      $('.highlighted:contains("' + text + '")').removeClass('highlighted');
+      target.remove();
     }
   };
 };

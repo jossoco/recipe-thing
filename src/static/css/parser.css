@@ -46,11 +46,6 @@ body {
   overflow-y: scroll;
 }
 
-.widget-contents li {
-  margin-left: -10px;
-  padding-right: 10px;
-}
-
 .buttons {
   text-align: center;
 }
@@ -63,4 +58,36 @@ body {
 
 .highlighted {
   background-color: #FFFA70;
+}
+
+#parse-widget ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+#parse-widget li {
+  padding-left: 1em;
+  text-index: -1em;
+  cursor: pointer;
+}
+
+#parse-widget li:before {
+  content: "\2022";
+  padding-right: 5px;
+  width: 12px;
+  height: 16px;
+  text-align: center;
+}
+
+#parse-widget li:hover:before {
+  content: "\e800";
+  color: #A81D22;
+}
+
+.icon:before {
+  font-family: 'fontello';
+  display: inline-block;
+  text-decoration: none;
+  speak: none;
 }

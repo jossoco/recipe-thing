@@ -40,6 +40,7 @@ body {
   text-transform: uppercase;
   margin: 0;
   color: #A81D22;
+  letter-spacing: -2px;
 }
 
 #recipe-parser-header .header {
@@ -65,7 +66,7 @@ body {
 }
 
 #parse-widget .header {
-  background-color: #2A9AAE;
+  background-color: #4FB5B3;
   color: #EEE;
   padding: 4px;
   text-transform: uppercase;
@@ -126,18 +127,16 @@ body {
 }
 
 #parse-widget li {
-  padding-left: 1em;
-  text-index: -1em;
   cursor: pointer;
   padding-right: 8px;
+  padding-left: 32px;
 }
 
 #parse-widget li:before {
   content: "\2022";
-  padding-right: 5px;
-  width: 12px;
   height: 16px;
   text-align: center;
+  text-indent: -2em;
 }
 
 #parse-widget li:hover:before {

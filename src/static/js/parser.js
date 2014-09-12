@@ -118,8 +118,13 @@ function RecipeParser () {
   };
 
   this.renderStep = function (text) {
-    this.widgetContents.text(text);
-    this.steps.push(text);
+    this.widgetContents.append(' ' + text);
+    var savedStep = this.steps[this.currentStepIndex - 1];
+    if (savedStep) {
+      this.steps[this.currentStepIndex - 1] = savedStep + ' ' + text;
+    } else {
+      this.steps.push(text);
+    }
   };
 
   this.onListItemClick = function (event) {

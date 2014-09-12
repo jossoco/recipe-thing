@@ -1,19 +1,24 @@
 function RecipeParser () {
 
   this.TEMPLATE_NAME = 'parser';
-  this.PARSING_TYPES = ['ingredients', 'instructions'];
+  this.TYPES = {
+    INGREDIENTS: 'Ingredients',
+    STEP: 'Step'
+  };
 
   this.init = function (options) {
     this.id = 'recipe-parser';
+
     this.currentStepIndex = 0;
     this.ingredients = [];
+    this.steps = [];
 
     rangy.init();
     this.start(options);
   };
 
   this.start = function (options) {
-    options.type = this.PARSING_TYPES[this.currentStepIndex];
+    options.type = this.getStepName();
     this.render(options);
 
     this.cssApplier = rangy.createCssClassApplier('highlighted', {normalize: true});
@@ -22,7 +27,7 @@ function RecipeParser () {
     this.addButton = $('#' + this.id + ' .add-btn');
     this.editPanel = $('#edit-panel');
     this.recipePanel = $('#recipe-panel');
-    this.parseWidget = $('#parse-widget');
+    this.widget = $('#parse-widget');
     this.widgetContents = $('#' + this.id + ' .widget-contents');
 
     this.recipePanel.find('.button').removeClass('button');
@@ -35,30 +40,43 @@ function RecipeParser () {
   };
 
   this.onNextButtonClick = function () {
-    var contents = this.widgetContents.find('.list');
-    this.showElement(this.editPanel);
-    this.hideElement(this.parseWidget);
-    this.hideElement(this.recipePanel);
-    this.editPanel.find('.text-type').text(this.PARSING_TYPES[this.currentStepIndex]);
-    this.editPanel.find('.user-text').html(contents);
+    $('.highlighted').removeClass('highlighted').addClass('selected').addClass('selected-' + this.currentStepIndex);
+    this.currentStepIndex += 1;
+    this.hideElement($('span.ingredients'));
+    this.showElement($('span.step'));
+    this.nextButton.addClass('disabled');
+    var type = this.getStepName();
+    this.widgetContents.text('');
+    this.widget.find('.header').text(type);
+    this.widget.find('.type').text(type);
   };
 
   this.onAddButtonClick = function () {
     var highlightedText = this.getHighlightedText();
     if ('' !== highlightedText) {
-      this.parseAndRenderIngredients(highlightedText);
+      // Ingredients
+      if (this.currentStepIndex === 0) {
+        this.renderIngredients(highlightedText);
+        if (this.widgetContents.find('li').length > 0) {
+          this.nextButton.removeClass('disabled');
+        }
+        $('#parse-widget li').unbind('click');
+          this.bindEvents({
+            'click #parse-widget li': this.onListItemClick
+        });
+
+      // Steps
+      } else {
+        this.renderStep(highlightedText);
+        if (this.widgetContents.text() !== '') {
+          this.nextButton.removeClass('disabled');
+        }
+      }
     }
+
     this.addButton.addClass('disabled');
-    if (this.widgetContents.find('li').length > 0) {
-      this.nextButton.removeClass('disabled');
-    }
     this.cssApplier.applyToSelection();
     this.deselectText();
-
-    $('#parse-widget li').unbind('click');
-    this.bindEvents({
-      'click #parse-widget li': this.onListItemClick
-    });
   };
 
   this.getHighlightedText = function () {
@@ -87,7 +105,7 @@ function RecipeParser () {
     }
   };
 
-  this.parseAndRenderIngredients = function (text) {
+  this.renderIngredients = function (text) {
     var ingredients = text.split('\n');
     this.ingredients = this.ingredients.concat(ingredients);
     var renderedIngredients = this.renderTemplate('ingredients', {ingredients: ingredients});
@@ -99,6 +117,11 @@ function RecipeParser () {
     }
   };
 
+  this.renderStep = function (text) {
+    this.widgetContents.text(text);
+    this.steps.push(text);
+  };
+
   this.onListItemClick = function (event) {
     var target = $(event.target);
     var text = target.text();
@@ -106,6 +129,14 @@ function RecipeParser () {
     if (confirmed) {
       $('.highlighted:contains("' + text + '")').removeClass('highlighted');
       target.remove();
+    }
+  };
+
+  this.getStepName = function () {
+    if (this.currentStepIndex === 0) {
+      return this.TYPES.INGREDIENTS;
+    } else {
+      return this.TYPES.STEP + ' ' + this.currentStepIndex;
     }
   };
 };

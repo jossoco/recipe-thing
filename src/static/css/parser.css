@@ -120,6 +120,10 @@ body {
   background-color: #FFFA70;
 }
 
+.selected {
+  background-color: #CCC;
+}
+
 #parse-widget ul {
   list-style: none;
   margin-left: 0;

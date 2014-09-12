@@ -86,8 +86,8 @@ body {
 }
 
 .label {
-  text-transform: uppercase;
   margin-top: 18px;
+  text-decoration: underline;
 }
 
 .widget-contents {

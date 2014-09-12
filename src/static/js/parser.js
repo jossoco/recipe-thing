@@ -54,6 +54,8 @@ function RecipeParser () {
     }
     this.cssApplier.applyToSelection();
     this.deselectText();
+
+    $('#parse-widget li').unbind('click');
     this.bindEvents({
       'click #parse-widget li': this.onListItemClick
     });

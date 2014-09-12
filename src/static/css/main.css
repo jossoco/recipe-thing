@@ -1,0 +1,36 @@
+.button {
+  background-color: #2A9AAE;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  min-width: 70px;
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+  color: #EEE;
+  font-size: 16px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #4FB5B3;
+}
+
+.hidden {
+  display: none;
+}
+
+.button.hidden {
+  display: none;
+}
+
+.button.disabled {
+  background-color: #AAA;
+  cursor: default;
+}

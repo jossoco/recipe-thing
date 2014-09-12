@@ -29,6 +29,8 @@ def recipe():
             data['url'] = url
             return render_template('recipe.html', data=json.dumps(data))
         else:
+            return render_template('parser.html', data=json.dumps(data))
+
             session['error'] = "Recipe could not be read"
             return redirect(url_for('form'))
     except urllib2.HTTPError as httpError:

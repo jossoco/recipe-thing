@@ -77,14 +77,6 @@ html, body, .recipe {
   height: 100%;
 }
 
-.hidden {
-  display: none;
-}
-
-.button.hidden {
-  display: none;
-}
-
 .recipe-title {
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -137,34 +129,6 @@ html, body, .recipe {
   width: 200px;
   height: 150px;
   display: none;
-}
-
-.button {
-  background-color: #2A9AAE;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-  min-width: 70px;
-  display: inline-block;
-  cursor: pointer;
-  padding: 10px;
-  color: #EEE;
-  font-size: 16px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.button:hover {
-  background-color: #4FB5B3;
-}
-
-.button.disabled {
-  background-color: #AAA;
-  cursor: default;
 }
 
 .recipe-meter-container {

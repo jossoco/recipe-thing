@@ -10,6 +10,22 @@ class RecipeParser():
         data['steps'] = self._parse_text_list(soup, 'instruction', ['recipeInstructions', 'instructions'])
         data['ingredients'] = self._parse_text_list(soup, 'ingredient', ['ingredient', 'ingredients'])
         data['imageUrl'] = self._parse_image(soup)
+
+        if len(data['steps']) == 0:
+            soup.head.decompose()
+            if soup.find(class_='comments'):
+                soup.find(class_='comments').decompose()
+            if soup.find(class_='sidebar'):
+                soup.find(class_='sidebar').decompose()
+            if soup.find(class_='post-footer'):
+                soup.find(class_='post-footer').decompose()
+            if soup.find(class_='nav'):
+                soup.find(class_='nav').decompose()
+            [s.extract() for s in soup('script')]
+            [s.extract() for s in soup('img')]
+            html_str = str(soup)
+            data['allText'] = html_str
+
         return data
 
     def _parse_title_and_source(self, soup):
@@ -33,7 +49,6 @@ class RecipeParser():
     def _parse_text_list(self, soup, class_name, item_props):
         list = []
         els = soup.find_all(class_=class_name)
-
         if len(els) == 0:
             child_els = []
             for item_prop in item_props:

@@ -25,7 +25,6 @@ function RecipeParser () {
 
     this.nextButton = $('#' + this.id + ' .next-btn');
     this.addButton = $('#' + this.id + ' .add-btn');
-    this.editPanel = $('#edit-panel');
     this.recipePanel = $('#recipe-panel');
     this.widget = $('#parse-widget');
     this.widgetContents = $('#' + this.id + ' .widget-contents');

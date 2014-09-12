@@ -12,28 +12,7 @@ class RecipeParser():
         data['imageUrl'] = self._parse_image(soup)
 
         if len(data['steps']) == 0:
-            soup.head.decompose()
-            if soup.find(class_='comments'):
-                soup.find(class_='comments').decompose()
-            if soup.find(class_='sidebar'):
-                soup.find(class_='sidebar').decompose()
-            if soup.find(class_='post-footer'):
-                soup.find(class_='post-footer').decompose()
-            if soup.find(class_='nav'):
-                soup.find(class_='nav').decompose()
-            if soup.find(id='comments'):
-                soup.find(id='comments').decompose()
-
-            def is_empty(text):
-                return len(text.strip()) == 0
-            [s.extract() for s in soup.find_all(text=is_empty)]
-
-            [s.extract() for s in soup('script')]
-            [s.extract() for s in soup('img')]
-            [s.extract() for s in soup('form')]
-
-            html_str = str(soup)
-            data['allText'] = html_str
+            data['recipeHtml'] = self._parse_recipe_html(soup)
 
         return data
 
@@ -118,6 +97,32 @@ class RecipeParser():
             return int(attr)
         except:
             return 0
+
+    def _parse_recipe_html(self, soup):
+        # Remove page head
+        soup.head.decompose()
+
+        # Remove elements with these classes or ids
+        strip_tags = ['comments', 'sidebar', 'nav']
+        for tag in strip_tags:
+            class_el = soup.find(class_=tag)
+            if class_el:
+                class_el.decompose()
+            id_el = soup.find(id=tag)
+            if id_el:
+                id_el.decompose()
+
+        # Remove elements of these types
+        strip_types = ['script', 'img', 'form']
+        for type in strip_types:
+            [s.extract() for s in soup(type)]
+
+        # Try to remove empty elements -- needs some work
+        def is_empty(text):
+            return len(text.strip()) == 0
+        [s.extract() for s in soup.find_all(text=is_empty)]
+
+        return str(soup)
 
 
 def parse_recipe(input):

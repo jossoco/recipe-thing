@@ -116,7 +116,7 @@ RecipeParser.prototype.constructor = RecipeParser;
 $(document).ready(function () {
   var parser = new RecipeParser();
   var options = {
-    allText: recipeData.allText.replace('\n', '')
+    recipeHtml: recipeData.recipeHtml.replace('\n', '')
   };
   parser.init(options);
 });

@@ -49,6 +49,7 @@ def recipe():
     if recipe:
         recipe = recipe[0]
         return render_template('recipe.html', data=json.dumps({
+            'title': recipe.title,
             'url': recipe.recipeUrl,
             'imageUrl': recipe.imageUrl,
             'sourceName': recipe.sourceName,
@@ -95,8 +96,7 @@ def editor():
           #return redirect(url_for('recipe', url=data['recipeUrl']))
       except Exception as e:
           # handle
-          print type(e)
-          print str(e)
+          pass
 
     data = request.args.get('data')
     return render_template('parser.html', data=json.dumps(data))

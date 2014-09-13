@@ -8,11 +8,16 @@ function RecipeParser () {
 
   this.init = function (options) {
     this.id = 'recipe-parser';
+    this.recipeData = {
+      title: options.title,
+      sourceName: options.sourceName,
+      imageUrl: options.imageUrl,
+      recipeUrl: options.url,
+      ingredients: [],
+      steps: []
+    };
 
     this.currentStepIndex = 0;
-    this.ingredients = [];
-    this.steps = [];
-
     rangy.init();
     this.start(options);
   };
@@ -25,6 +30,7 @@ function RecipeParser () {
 
     this.nextButton = $('#' + this.id + ' .next-btn');
     this.addButton = $('#' + this.id + ' .add-btn');
+    this.doneButton = $('#' + this.id + ' .done-btn');
     this.recipePanel = $('#recipe-panel');
     this.widget = $('#parse-widget');
     this.widgetContents = $('#' + this.id + ' .widget-contents');
@@ -34,7 +40,8 @@ function RecipeParser () {
     $('body').mouseup($.proxy(this.updateButtonState, this));
     this.bindEvents({
       'click .next-btn': this.onNextButtonClick,
-      'click .add-btn': this.onAddButtonClick
+      'click .add-btn': this.onAddButtonClick,
+      'click .done-btn': this.onDoneButtonClick
     });
   };
 
@@ -106,7 +113,7 @@ function RecipeParser () {
 
   this.renderIngredients = function (text) {
     var ingredients = text.split('\n');
-    this.ingredients = this.ingredients.concat(ingredients);
+    this.recipeData.ingredients = this.recipeData.ingredients.concat(ingredients);
     var renderedIngredients = this.renderTemplate('ingredients', {ingredients: ingredients});
     var list = this.widgetContents.find('.list');
     if (list.length > 0) {
@@ -118,11 +125,11 @@ function RecipeParser () {
 
   this.renderStep = function (text) {
     this.widgetContents.append(' ' + text);
-    var savedStep = this.steps[this.currentStepIndex - 1];
+    var savedStep = this.recipeData.steps[this.currentStepIndex - 1];
     if (savedStep) {
-      this.steps[this.currentStepIndex - 1] = savedStep + ' ' + text;
+      this.recipeData.steps[this.currentStepIndex - 1] = savedStep + ' ' + text;
     } else {
-      this.steps.push(text);
+      this.recipeData.steps.push(text);
     }
   };
 
@@ -143,6 +150,24 @@ function RecipeParser () {
       return this.TYPES.STEP + ' ' + this.currentStepIndex;
     }
   };
+
+  this.onDoneButtonClick = function () {
+    var self = this;
+    onSuccess = function () {
+      //$.ajax({
+      //  type: 'GET',
+      //  url: 'recipe?url=' + self.recipeData.recipeUrl,
+      //});
+      window.location = '/recipe?url=' + self.recipeData.recipeUrl;
+    };
+    $.ajax({
+      type: 'POST',
+      url: 'editor',
+      contentType: 'application/json',
+      data: JSON.stringify(this.recipeData),
+      success: onSuccess
+    });
+  };
 };
 
 RecipeParser.prototype = new View();
@@ -150,7 +175,12 @@ RecipeParser.prototype.constructor = RecipeParser;
 
 $(document).ready(function () {
   var parser = new RecipeParser();
+  recipeData = JSON.parse(recipeData);
   var options = {
+    title: recipeData.title,
+    sourceName: recipeData.sourceName,
+    imageUrl: recipeData.imageUrl,
+    url: recipeData.url,
     recipeHtml: recipeData.recipeHtml.replace('\n', '')
   };
   parser.init(options);

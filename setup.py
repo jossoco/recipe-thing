@@ -14,6 +14,8 @@ setup(name='recipez',
       packages=find_packages(),
       install_requires=[
         "Flask>=0.10.1",
-        "beautifulsoup4>=4.3.2"
+        "beautifulsoup4>=4.3.2",
+        "mongoengine>=0.8.7",
+        "flask-mongoengine>=0.7.0"
       ]
 )

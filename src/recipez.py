@@ -92,10 +92,8 @@ def editor():
           Recipe(title=data['title'], sourceName=data['sourceName'], imageUrl=data['imageUrl'],
                  recipeUrl=data['recipeUrl'], steps=data['steps'], ingredients=data['ingredients']).save()
           return 'SUCCESS'
-          #return redirect(url_for('recipe', url=data['recipeUrl']))
-      except Exception as e:
-          # handle
-          pass
+      except Exception as exc:
+          raise(exc)
 
     data = request.args.get('data')
     return render_template('parser.html', data=json.dumps(data))

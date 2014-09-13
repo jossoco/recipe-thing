@@ -64,20 +64,32 @@ class RecipeParser():
         return list
 
     def _parse_image(self, soup):
-        tagged_images = soup.find_all(attrs={'itemprop': 'image'})
-        if len(tagged_images) == 1 and 'src' in tagged_images[0].attrs:
-            return tagged_images[0].attrs['src']
+        item_props = ['image', 'photo']
+        images = None 
+        for prop in item_props:
+            tagged_images = soup.find_all(attrs={'itemprop': prop})
+            if len(tagged_images) == 1 and 'src' in tagged_images[0].attrs:
+                return tagged_images[0].attrs['src']
+            elif len(tagged_images) > 1:
+                images = tagged_images
+                break
+        if not images:
+            images = soup.find_all('img')
 
-        images = soup.find_all('img')
         if len(images) > 1:
-            target_image = ''
+            target_image = None
             max_area = 0
             for image in images:
-                area = self._get_image_area(image)
-                if area > max_area:
-                    max_area = area
-                    target_image = image
-            if target_image and 'src' in target_image.attrs:
+                if 'src' in image.attrs and str.startswith(str(image.attrs['src']), 'http'):
+                    area = self._get_image_area(image)
+                    if area > max_area:
+                        max_area = area
+                        target_image = image
+            if max_area == 0 and images[0].attrs and images[0].attrs['src']:
+                # If images don't have dimensions just return first one
+                # (usually logo so maybe not best)
+                return images[0].attrs['src']
+            if target_image:
                 return target_image.attrs['src']
         elif len(images) == 1 and 'src' in images[0].attrs:
             return images[0].attrs['src']

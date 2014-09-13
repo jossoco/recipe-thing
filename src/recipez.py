@@ -40,7 +40,7 @@ def main():
         return redirect(url_for('recipe', url=url))
     else:
         return redirect(url_for('form'))
-    
+
 @app.route('/recipe')
 def recipe():
     url = request.args.get('url')

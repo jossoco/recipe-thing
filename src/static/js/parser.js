@@ -154,10 +154,6 @@ function RecipeParser () {
   this.onDoneButtonClick = function () {
     var self = this;
     onSuccess = function () {
-      //$.ajax({
-      //  type: 'GET',
-      //  url: 'recipe?url=' + self.recipeData.recipeUrl,
-      //});
       window.location = '/recipe?url=' + self.recipeData.recipeUrl;
     };
     $.ajax({

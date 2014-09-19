@@ -1,0 +1,154 @@
+#recipez-editor {
+  width: 215px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999999999999;
+  font-family: 'Lato', sans-serif !important;
+  color: #444;
+  background-color: #EEE;
+  box-shadow: 5px 5px 30px #222 !important;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#recipez-editor .recipez-editor-head {
+  background-color: #4FB5B3 !important;
+  color: #EEE !important;
+  padding: 4px !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+  font-size: 16px !important;
+
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+#recipez-editor .recipez-editor-body {
+  padding: 10px;
+  line-height: 18px !important;
+  font-size: 14px !important;
+
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-bottom-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-bottom-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  border: 4px solid #CCC;
+  border-top: 0;
+}
+
+#recipez-editor .recipez-editor-body .recipez-editor-body-contents {
+  background-color: #FFF;
+  padding: 8px 0;
+  margin: 8px 0;
+  border: 1px dashed #CCC;
+  min-height: 20px;
+  max-height: 250px;
+  overflow-y: scroll;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#recipez-confirm .button-label,
+#recipez-editor .button-label {
+  background-color: #DDD;
+  padding: 0 8px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+
+#recipez-confirm .buttons,
+#recipez-editor .buttons {
+  text-align: center;
+}
+
+#recipez-confirm .button,
+#recipez-editor .button {
+  margin: 18px 4px 4px 4px !important;
+  padding: 8px !important;
+  background-color: #2A9AAE !important;
+  min-width: 60px !important;
+  display: inline-block;
+  cursor: pointer !important;
+  color: #EEE !important;
+  font-size: 16px !important;
+  -webkit-border-radius: 20px !important;
+  -moz-border-radius: 20px !important;
+  border-radius: 20px !important;
+  text-align: center !important;
+  -moz-user-select: none !important;
+  -khtml-user-select: none !important;
+  -webkit-user-select: none !important;
+  -o-user-select: none !important;
+
+  border: 0 !important;
+}
+
+#recipez-confirm .button:hover,
+#recipez-editor .button:hover {
+  background-color: #4FB5B3 !important;
+}
+
+#recipez-confirm .button.disabled,
+#recipez-editor .button.disabled {
+  background-color: #AAA !important;
+  cursor: default;
+}
+
+#recipez-confirm .button.disabled:hover,
+#recipez-editor .button.disabled:hover {
+  background-color: #AAA !important;
+}
+
+.recipez-highlighted {
+  background-color: #FFFA70 !important;
+}
+
+#recipez-editor .recipez-editor-body-contents ul {
+  margin-left: 20px !important;
+}
+
+#recipez-editor.hidden,
+#recipez-editor .hidden {
+  display: none;
+}
+
+#recipez-confirm {
+  width: 400px;
+  background-color: #EEE;
+  z-index: 9999999999999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 12px;
+  line-height: 18px !important;
+  font-size: 14px !important;
+
+  border: 4px solid #CCC;
+  box-shadow: 5px 5px 30px #222 !important;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#recipez-bg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8888888888;
+  background-color: #000;
+  opacity: 0.4;
+}

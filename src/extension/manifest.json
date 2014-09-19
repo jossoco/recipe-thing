@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "Recipez",
+  "version": "1.0",
+  "description": "Use this extension to parse any recipe for easy viewing.",
+  "background": {
+    "persistent": false,
+    "scripts": ["load.js", "editor.js", "assets/js/rangy-core.js", "assets/js/rangy-cssclassapplier.js"]
+  },
+  "web_accessible_resources": [
+    "assets/css/editor.css",
+    "assets/js/rangy-core.js",
+    "assets/js/rangy-cssclassapplier.js"
+  ],
+  "permissions": [
+    "tabs", "activeTab", "http://*/*"
+  ],
+  "browser_action": {
+    "default_title": "",
+    "default_icon": "assets/images/hat_icon.png"
+  }
+}

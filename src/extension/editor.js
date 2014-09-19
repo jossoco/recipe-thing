@@ -45,9 +45,18 @@ function Editor() {
     this.cssApplier = rangy.createCssClassApplier('recipez-highlighted', {normalize: true});
     this.index = 0;
     this.currentData;
+    this.recipeData = {
+      ingredients: [],
+      steps: [],
+      title: '',
+      imageUrl: '',
+      sourceName: '',
+      url: window.location.href
+    };
 
     this.appendCSS();
     this.appendEditor();
+    this.appendReviewDialog();
 
     this.setVariables();
     this.bindEvents();
@@ -100,6 +109,7 @@ function Editor() {
     $('body').mouseup($.proxy(this.updateButtonState, this));
     $(this.addButton).on('click', $.proxy(this.onAddButtonClick, this)); 
     $(this.nextButton).on('click', $.proxy(this.onNextButtonClick, this));
+    $(this.reviewBackButton).on('click', $.proxy(this.onReviewBackButtonClick, this));
   };
 
   this.onAddButtonClick = function () {
@@ -121,11 +131,17 @@ function Editor() {
 
     // Show review
     this.editor.addClass('hidden');
-    this.appendReviewDialog();
+    this.loadReviewDialog();
   };
 
-  this.showReviewDialog = function () {
-    
+  this.loadReviewDialog = function () {
+    var self = this;
+    $.each(this.REVIEW_SECTIONS, function (i, section) {
+      var el = $(self.reviewDialog.find('.recipez-review-section.' + section)[0]);
+      $(el.find('.recipez-review-section-body')[0]).html(self.recipeData[section]);
+    });
+
+    this.reviewDialog.removeClass('hidden');
   };
 
   this.getSelectedText = function () {
@@ -179,19 +195,19 @@ function Editor() {
     }
   };
 
+  this.onReviewBackButtonClick = function () {
+    this.reviewDialog.addClass('hidden');
+    this.editor.removeClass('hidden');
+  };
+
   this.setVariables = function () {
-    this.recipeData = {
-      ingredients: [],
-      steps: [],
-      title: '',
-      imageUrl: '',
-      sourceName: '',
-      url: window.location.href
-    };
     this.editor = $('#recipez-editor');
+    this.reviewDialog = $('#recipez-review');
     this.editorBody = $(this.editor.find('.recipez-editor-body'));
     this.addButton = $('#add-btn');
     this.nextButton = $('#next-btn');
+    this.reviewBackButton = $('#review-back-btn');
+    this.reviewNextButton = $('#review-next-btn');
     this.contents = $(this.editorBody.find('.recipez-editor-body-contents'));
   };
 };

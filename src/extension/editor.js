@@ -20,6 +20,12 @@ function Editor() {
     }
   ];
 
+  this.REVIEW_SECTIONS = [
+    'title',
+    'ingredients',
+    'steps'
+  ];
+
   this.HEADER_TEXT = [
     'Recipe Title',
     'Ingredients',
@@ -32,12 +38,6 @@ function Editor() {
     'Highlight ingredients, then click the <span class="button-label">Add</span> button. ' +
     'When all ingredients have been added, click the <span class="button-label">Next</span> ' +
     'button to continue.'
-  ];
-
-  this.CONFIRM_DIALOG = [
-    'You have selected the recipe title "<span class="selected-data"></span>." If this is ' +
-    'correct, click the ' + '<span class="button-label">Next</span> button to continue. If not, ' +
-    'click the <span class="button-label">Back</span> button to edit your selection.'
   ];
 
   this.start = function () {
@@ -63,41 +63,37 @@ function Editor() {
     });
   };
 
+  this.renderTemplate = function (templateName, options) {
+   options = options || {};
+   var url = chrome.extension.getURL('assets/js/ejs/' + templateName + '.ejs');
+   return new EJS({url: url}).render(options);
+  };
+
   this.appendEditor = function () {
     // Remove existing editor if one exists
     $('#recipez-editor').remove();
 
-    var editor = $('<div id="recipez-editor"></div>');
-    editor.append('<div class="recipez-editor-head">' + this.HEADER_TEXT[this.index] + '</div>');    
-
-    var editorBody = $('<div class="recipez-editor-body"></div>');
-    editorBody.append(this.BODY_CONTENT[this.index]);
-
-    editorBody.append('<div class="recipez-editor-body-contents hidden"></div>');
-    var buttonContainer = $('<div class="buttons"></div>');
-    buttonContainer.append($('<div id="add-btn" class="button hidden disabled">Add</div>'));
-    buttonContainer.append($('<div id="next-btn" class="button disabled">Next</div>'));
-    editorBody.append(buttonContainer);
-    editor.append(editorBody);
-    $('body').append(editor);
+    $('body').append(this.renderTemplate('editor', {
+      headerText: this.HEADER_TEXT[this.index],
+      body: this.BODY_CONTENT[this.index]
+    }));
   };
 
-  this.appendConfirmDialog = function () {
-    $('#recipez-confirm').remove();
+  this.appendReviewDialog = function () {
+    $('#recipez-review').remove();
 
-    var confirm = $('<div id="recipez-confirm"></div>');
-    var confirmBody = $('<div class="recipez-confirm-body"></div>');
-    confirmBody.append(this.CONFIRM_DIALOG[this.index]);
-    confirmBody.find('.selected-data').html(this.currentData);
-    
-    var buttonContainer = $('<div class="buttons"></div>');
-    buttonContainer.append('<div id="back-btn" class="button">Back</div>');
-    buttonContainer.append('<div id="confirm-next-btn" class="button">Next</div>');
-    confirmBody.append(buttonContainer);
-    confirm.append(confirmBody);
-    $('body').append('<div id="recipez-bg"></div>');
-    $('#recipez-bg').css('height', $(document).height() + 'px');
-    $('body').append(confirm);
+    var self = this;
+    var sections = '';
+    $.each(this.REVIEW_SECTIONS, function (i, section) {
+      sections += self.renderTemplate('review_section', {
+        body: self.recipeData[section],
+        type: section
+      });
+    });
+
+    $('body').append(this.renderTemplate('review', {
+      sections: sections
+    }));
   };
 
   this.bindEvents = function () {
@@ -123,12 +119,12 @@ function Editor() {
        this.unselectText();
     }
 
-    // Show confirmation
+    // Show review
     this.editor.addClass('hidden');
-    this.appendConfirmDialog();
+    this.appendReviewDialog();
   };
 
-  this.showConfirmDialog = function () {
+  this.showReviewDialog = function () {
     
   };
 

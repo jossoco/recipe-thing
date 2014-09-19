@@ -9,8 +9,9 @@
   },
   "web_accessible_resources": [
     "assets/css/editor.css",
-    "assets/js/rangy-core.js",
-    "assets/js/rangy-cssclassapplier.js"
+    "assets/js/ejs/editor.ejs",
+    "assets/js/ejs/review.ejs",
+    "assets/js/ejs/review_section.ejs"
   ],
   "permissions": [
     "tabs", "activeTab", "http://*/*"

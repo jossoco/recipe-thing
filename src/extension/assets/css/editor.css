@@ -58,7 +58,7 @@
   border-radius: 10px;
 }
 
-#recipez-confirm .button-label,
+#recipez-review .button-label,
 #recipez-editor .button-label {
   background-color: #DDD;
   padding: 0 8px;
@@ -67,12 +67,12 @@
   border-radius: 20px;
 }
 
-#recipez-confirm .buttons,
+#recipez-review .buttons,
 #recipez-editor .buttons {
   text-align: center;
 }
 
-#recipez-confirm .button,
+#recipez-review .button,
 #recipez-editor .button {
   margin: 18px 4px 4px 4px !important;
   padding: 8px !important;
@@ -94,18 +94,18 @@
   border: 0 !important;
 }
 
-#recipez-confirm .button:hover,
+#recipez-review .button:hover,
 #recipez-editor .button:hover {
   background-color: #4FB5B3 !important;
 }
 
-#recipez-confirm .button.disabled,
+#recipez-review .button.disabled,
 #recipez-editor .button.disabled {
   background-color: #AAA !important;
   cursor: default;
 }
 
-#recipez-confirm .button.disabled:hover,
+#recipez-review .button.disabled:hover,
 #recipez-editor .button.disabled:hover {
   background-color: #AAA !important;
 }
@@ -118,28 +118,27 @@
   margin-left: 20px !important;
 }
 
+#recipez-review.hidden,
 #recipez-editor.hidden,
 #recipez-editor .hidden {
   display: none;
 }
 
-#recipez-confirm {
-  width: 400px;
-  background-color: #EEE;
+#recipez-review {
+  width: 60% !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  position: fixed;
   z-index: 9999999999999;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 12px;
-  line-height: 18px !important;
-  font-size: 14px !important;
-
-  border: 4px solid #CCC;
+  font-family: 'Lato', sans-serif !important;
+  border: 2px solid #CCC;
+  background-color: #FFF;
   box-shadow: 5px 5px 30px #222 !important;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+}
+
+#recipez-review .recipez-review-body {
+  padding: 10px;
 }
 
 #recipez-bg {
@@ -151,4 +150,49 @@
   z-index: 8888888888;
   background-color: #000;
   opacity: 0.4;
+}
+
+#recipez-review .recipez-review-head {
+  background-color: #CCC;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 4px;
+}
+
+#recipez-review .recipez-review-sections {
+  height: 350px !important;
+}
+
+#recipez-review .recipez-review-section {
+  float: left;
+  margin: 6px;
+}
+
+#recipez-review .recipez-review-section-body {
+  border: 1px dashed #CCC;
+  padding: 6px;
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#recipez-review .recipez-review-section-label {
+  text-transform: uppercase;
+  font-size: 12px !important;
+  color: #CCC !important;
+}
+
+#recipez-review .recipez-review-section.title {
+  width: 98% !important;
+}
+
+#recipez-review .recipez-review-section.steps,
+#recipez-review .recipez-review-section.ingredients {
+  width: 48% !important;
+}
+
+#recipez-review .recipez-review-section.steps .recipez-review-section-body,
+#recipez-review .recipez-review-section.ingredients .recipez-review-section-body {
+  min-height: 200px !important;
 }

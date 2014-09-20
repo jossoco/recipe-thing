@@ -105,30 +105,19 @@ function Editor() {
 
   this.onAddButtonClick = function () {
     if (!this.addButton.hasClass('disabled')) {
-      this.cssApplier.applyToSelection();
-      this.appendIngredients(this.getSelectedText());
-      this.unselectText();
-      this.updateButtonState();
+      if (this.index == 1) {
+        this.cssApplier.applyToSelection();
+        this.appendIngredients(this.getSelectedText());
+        this.unselectText();
+        this.updateButtonState();
+        this.bindListItemEvents();
+      }
     }
   };
 
   this.onNextButtonClick = function () {
     if (!this.nextButton.hasClass('disabled')) {
-      if (this.index == 0 && this.getSelectedText() != '') {
-        this.recipeData.title = this.getSelectedText();
-        $('.recipez-selected-0').removeClass('recipez-selected-0');
-        this.cssApplier.applyToSelection();
-      } else if (this.index == 1) {
-        var self = this;
-        this.recipeData.ingredients = [];
-        $.each(this.contents.find('li'), function (i, item) {
-          self.recipeData.ingredients.push($(item).text());
-        });
-      }
-
-      $('.recipez-highlighted').removeClass('recipez-highlighted').addClass(
-          'recipez-selected recipez-selected-' + this.index);
-
+      this.saveData();
       this.index += 1;
       this.unselectText();
       this.loadEditor();
@@ -136,15 +125,36 @@ function Editor() {
   };
 
   this.onBackButtonClick = function () {
-    this.index -= 1;
-    this.loadEditor();
+    if (!this.backButton.hasClass('disabled')) {
+      this.saveData();
+      this.index -= 1;
+      this.unselectText();
+      this.loadEditor();
+    }
+  };
+
+  this.saveData = function () {
+    if (this.index == 0 && this.getSelectedText() != '') {
+      this.recipeData.title = this.getSelectedText();
+      $('.recipez-selected-0').removeClass('recipez-selected-0');
+      this.cssApplier.applyToSelection();
+    } else if (this.index == 1) {
+      var self = this;
+      this.recipeData.ingredients = [];
+      $.each(this.contents.find('li'), function (i, item) {
+        self.recipeData.ingredients.push($(item).text());
+      });
+    }
+
+    $('.recipez-highlighted').removeClass('recipez-highlighted').addClass(
+       'recipez-selected recipez-selected-' + this.index);
   };
 
   this.loadEditor = function () {
-    this.reviewDialog.addClass('hidden');
     $(this.editor.find('.editor-section')).addClass('hidden');
     $(this.editor.find('.editor-section.' + this.SECTIONS[this.index])).removeClass('hidden');
     $(this.editor.find('.recipez-editor-head')).text(this.HEADER_TEXT[this.index]);
+
     if (this.index > 0) {
       this.contents.removeClass('hidden');
       this.backButton.removeClass('disabled');
@@ -156,6 +166,7 @@ function Editor() {
 
     if (this.index == 1) {
       this.appendIngredients(this.recipeData.ingredients.join('\n'));
+      this.bindListItemEvents();
     } else {
       this.contents.html('');
     }
@@ -255,6 +266,20 @@ function Editor() {
     this.reviewBackButton = $('#review-back-btn');
     this.reviewNextButton = $('#review-next-btn');
     this.contents = $(this.editorBody.find('.recipez-editor-body-contents'));
+  };
+
+  this.onListItemClick = function (event) {
+    var item = event.target;
+    var confirmed = confirm('Delete ingredient "' + $(item).text() + '"?');
+    if (confirmed) {
+      $(event.target).remove();
+      $(document).find(':contains(' + $(item).text() + ')').removeClass('recipez-highlighted')
+          .removeClass('recipez-selected').removeClass('recipez-selected-' + this.index);
+    }
+  };
+
+  this.bindListItemEvents = function () {
+    $(this.contents.find('li')).on('click', $.proxy(this.onListItemClick, this));
   };
 };
 

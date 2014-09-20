@@ -47,7 +47,7 @@
 
 #recipez-editor .recipez-editor-body .recipez-editor-body-contents {
   background-color: #FFF;
-  padding: 8px 0;
+  padding: 8px;
   margin: 8px 0;
   border: 1px dashed #CCC;
   min-height: 20px;
@@ -209,4 +209,43 @@
 #recipez-editor .contents-label {
   display: block;
   padding-top: 12px;
+}
+
+#recipez-editor .recipez-editor-body-contents ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+#recipez-editor .recipez-editor-body-contents li {
+  text-indent: -20px;
+  cursor: pointer;
+}
+
+#recipez-editor .recipez-editor-body-contents li:before {
+  content: "\2022";
+  height: 16px;
+  text-align: center;
+  text-indent: -2em;
+  margin-right: 8px;
+  padding: 2px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+#recipez-editor .recipez-editor-body-contents li:hover {
+  background-color: #FFEEEE;
+}
+
+#recipez-editor .recipez-editor-body-contents li:hover:before {
+  content: "\00d7";
+  color: #EEE;
+  background-color: #A81D22;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  height: 8px;
+  font-size: 12px;
+  padding: 0 4px;
+  margin-right: 5px;
 }

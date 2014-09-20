@@ -10,16 +10,6 @@ function Editor() {
     }
   ];
 
-  this.JS_FILES = [
-    {
-      src: 'assets/js/rangy-core.js',
-      local: true
-    }, {
-      src: 'assets/js/rangy-cssclassapplier.js',
-      local: true
-    }
-  ];
-
   this.SECTIONS = [
     'title',
     'ingredients',

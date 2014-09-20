@@ -1,5 +1,5 @@
 #recipez-editor {
-  width: 215px;
+  width: 250px;
   position: fixed;
   top: 20px;
   right: 20px;
@@ -74,10 +74,10 @@
 
 #recipez-review .button,
 #recipez-editor .button {
-  margin: 18px 4px 4px 4px !important;
+  margin: 18px 2px 2px 2px !important;
   padding: 8px !important;
   background-color: #2A9AAE !important;
-  min-width: 60px !important;
+  min-width: 45px !important;
   display: inline-block;
   cursor: pointer !important;
   color: #EEE !important;
@@ -102,7 +102,7 @@
 #recipez-review .button.disabled,
 #recipez-editor .button.disabled {
   background-color: #AAA !important;
-  cursor: default;
+  cursor: default !important;
 }
 
 #recipez-review .button.disabled:hover,
@@ -110,7 +110,16 @@
   background-color: #AAA !important;
 }
 
+#recipez-editor #back-btn,
+#recipez-editor #next-btn {
+  min-width: 20px !important;
+}
+
 .recipez-highlighted {
+  background-color: #FFFA70 !important;
+}
+
+.recipez-selected {
   background-color: #FFFA70 !important;
 }
 
@@ -195,4 +204,9 @@
 #recipez-review .recipez-review-section.steps .recipez-review-section-body,
 #recipez-review .recipez-review-section.ingredients .recipez-review-section-body {
   min-height: 200px !important;
+}
+
+#recipez-editor .contents-label {
+  display: block;
+  padding-top: 12px;
 }

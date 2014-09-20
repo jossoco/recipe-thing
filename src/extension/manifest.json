@@ -11,7 +11,8 @@
     "assets/css/editor.css",
     "assets/js/ejs/editor.ejs",
     "assets/js/ejs/review.ejs",
-    "assets/js/ejs/review_section.ejs"
+    "assets/js/ejs/review_section.ejs",
+    "assets/js/ejs/review_list.ejs"
   ],
   "permissions": [
     "tabs", "activeTab", "http://*/*"

@@ -1,3 +1,7 @@
+body {
+  cursor: text;
+}
+
 #recipez-editor {
   width: 250px;
   position: fixed;
@@ -5,12 +9,14 @@
   right: 20px;
   z-index: 9999999999999;
   font-family: 'Lato', sans-serif !important;
+  font-size: 14px !important;
   color: #444;
   background-color: #EEE;
   box-shadow: 5px 5px 30px #222 !important;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+  text-transform: none !important;
 }
 
 #recipez-editor .recipez-editor-head {
@@ -115,11 +121,11 @@
   min-width: 20px !important;
 }
 
-.recipez-highlighted {
-  background-color: #FFFA70 !important;
+.recipez-selected {
+  background-color: #DDD !important;
 }
 
-.recipez-selected {
+.recipez-highlighted {
   background-color: #FFFA70 !important;
 }
 
@@ -144,6 +150,8 @@
   border: 2px solid #CCC;
   background-color: #FFF;
   box-shadow: 5px 5px 30px #222 !important;
+  text-transform: none !important;
+  font-size: 14px !important;
 }
 
 #recipez-review .recipez-review-body {
@@ -163,7 +171,7 @@
 
 #recipez-review .recipez-review-head {
   background-color: #CCC;
-  text-transform: uppercase;
+  text-transform: uppercase !important;
   text-align: center;
   padding: 4px;
 }
@@ -179,15 +187,27 @@
 
 #recipez-review .recipez-review-section-body {
   border: 1px dashed #CCC;
-  padding: 6px;
+  padding: 12px;
 
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
 }
 
+#recipez-review .recipez-review-section-body ul {
+  list-style-type: circle !important;
+}
+
+#recipez-review .recipez-review-section-body ol {
+  list-style-type: decimal !important;
+}
+
+#recipez-review .recipez-review-section-body li {
+  margin-left: 20px !important;
+}
+
 #recipez-review .recipez-review-section-label {
-  text-transform: uppercase;
+  text-transform: uppercase !important;
   font-size: 12px !important;
   color: #CCC !important;
 }
@@ -203,7 +223,12 @@
 
 #recipez-review .recipez-review-section.steps .recipez-review-section-body,
 #recipez-review .recipez-review-section.ingredients .recipez-review-section-body {
-  min-height: 200px !important;
+  height: 200px !important;
+  overflow-y: scroll;
+}
+
+#recipez-review .recipez-review-content {
+  clear: both;
 }
 
 #recipez-editor .contents-label {

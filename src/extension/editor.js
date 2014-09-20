@@ -18,8 +18,7 @@ function Editor() {
 
   this.HEADER_TEXT = [
     'Recipe Title',
-    'Ingredients',
-    'Step'
+    'Ingredients'
   ];
 
   this.start = function () {
@@ -89,8 +88,7 @@ function Editor() {
     $(this.addButton).on('click', $.proxy(this.onAddButtonClick, this)); 
     $(this.nextButton).on('click', $.proxy(this.onNextButtonClick, this));
     $(this.backButton).on('click', $.proxy(this.onBackButtonClick, this));
-    $(this.reviewBackButton).on('click', $.proxy(this.onReviewBackButtonClick, this));
-    $(this.reviewNextButton).on('click', $.proxy(this.onReviewNextButtonClick, this));
+    $(this.doneButton).on('click', $.proxy(this.onDoneButtonClick, this));
   };
 
   this.onAddButtonClick = function () {
@@ -109,6 +107,11 @@ function Editor() {
     if (!this.nextButton.hasClass('disabled')) {
       this.saveData();
       this.index += 1;
+
+      if (this.index == this.HEADER_TEXT.length) {
+        this.HEADER_TEXT.push('Step ' + (this.index-1));
+      }
+
       this.unselectText();
       this.loadEditor();
    }
@@ -134,6 +137,10 @@ function Editor() {
       $.each(this.contents.find('li'), function (i, item) {
         self.recipeData.ingredients.push($(item).text());
       });
+    } else if (this.getSelectedText() != '') {
+      this.recipeData.steps[this.index-2] = this.getSelectedText();
+      $('.recipez-selected-' + this.index).removeClass('recipez-selected-' + this.index);
+      this.cssApplier.applyToSelection();
     }
 
     $('.recipez-highlighted').removeClass('recipez-highlighted').addClass(
@@ -141,32 +148,35 @@ function Editor() {
   };
 
   this.loadEditor = function () {
+    var sectionIndex = this.index;
+    if (this.index >= this.SECTIONS.length) {
+      sectionIndex = 2;
+    }
     $(this.editor.find('.editor-section')).addClass('hidden');
-    $(this.editor.find('.editor-section.' + this.SECTIONS[this.index])).removeClass('hidden');
+    $(this.editor.find('.editor-section.' + this.SECTIONS[sectionIndex])).removeClass('hidden');
     $(this.editor.find('.recipez-editor-head')).text(this.HEADER_TEXT[this.index]);
 
     if (this.index > 0) {
-      this.contents.removeClass('hidden');
       this.backButton.removeClass('disabled');
     } else {
-      this.contents.addClass('hidden');
       this.backButton.addClass('disabled');
       this.addButton.addClass('disabled');
     }
 
     if (this.index == 1) {
+      this.contents.removeClass('hidden');
       this.appendIngredients(this.recipeData.ingredients.join('\n'));
       this.bindListItemEvents();
     } else {
-      this.contents.html('');
+      this.contents.addClass('hidden');
     }
 
     if (this.recipeData.steps.length > 0) {
       this.doneButton.removeClass('disabled');
     }
 
-    $('.recipez-selected').removeClass('recipez-selected');
-    $('.recipez-selected-' + this.index).addClass('recipez-selected');
+    $('.recipez-highlighted').removeClass('recipez-highlighted');
+    $('.recipez-selected-' + this.index).addClass('recipez-highlighted');
 
     this.updateButtonState();
   };
@@ -176,7 +186,17 @@ function Editor() {
     var self = this;
     $.each(this.SECTIONS, function (i, section) {
       var el = $(self.reviewDialog.find('.recipez-review-section.' + section)[0]);
-      $(el.find('.recipez-review-section-body')[0]).html(self.recipeData[section]);
+      var reviewBody;
+      if (section != 'title') {
+        var listType = section == 'ingredients' ? 'ul' : 'ol';
+        reviewBody = self.renderTemplate('review_list', {
+          items: self.recipeData[section],
+          listType: listType
+         });
+      } else {
+        reviewBody = self.recipeData[section];
+      }
+      $(el.find('.recipez-review-section-body')[0]).html(reviewBody);
     });
 
     this.reviewDialog.removeClass('hidden');
@@ -216,7 +236,7 @@ function Editor() {
   };
 
   this.updateButtonState = function () {
-    if (this.index > 0) {
+    if (this.index == 1) {
       if (this.getSelectedText() != '') {
         this.addButton.removeClass('disabled');
       } else {
@@ -228,22 +248,18 @@ function Editor() {
         this.nextButton.addClass('disabled');
       }
     } else {
-      if (this.getSelectedText() != '' || this.recipeData.title != '') {
+      var dataSaved = false;
+      if (this.index == 0) {
+        dataSaved = this.recipeData.title != '';
+      } else {
+        dataSaved = this.recipeData.steps.length >= (this.index-2) && this.recipeData.steps[this.index-2] != '';
+      }
+      if (this.getSelectedText() != '' || dataSaved) {
         this.nextButton.removeClass('disabled');
       } else {
         this.nextButton.addClass('disabled');
      }
     }
-  };
-
-  this.onReviewBackButtonClick = function () {
-    this.reviewDialog.addClass('hidden');
-    this.editor.removeClass('hidden');
-  };
-
-  this.onReviewNextButtonClick = function () {
-    this.index += 1;
-    this.loadEditor();
   };
 
   this.setVariables = function () {
@@ -253,6 +269,7 @@ function Editor() {
     this.addButton = $('#add-btn');
     this.nextButton = $('#next-btn');
     this.backButton = $('#back-btn');
+    this.doneButton = $('#done-btn');
     this.reviewBackButton = $('#review-back-btn');
     this.reviewNextButton = $('#review-next-btn');
     this.contents = $(this.editorBody.find('.recipez-editor-body-contents'));
@@ -271,6 +288,12 @@ function Editor() {
   this.bindListItemEvents = function () {
     $(this.contents.find('li')).on('click', $.proxy(this.onListItemClick, this));
   };
+
+  this.onDoneButtonClick = function () {
+    if (!this.doneButton.hasClass('disabled')) {
+      this.loadReviewDialog();
+    }
+  }
 };
 
 var editor = new Editor();

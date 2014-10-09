@@ -1,0 +1,39 @@
+<!doctype html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Recipez</title>
+
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/extension.css') }}">
+  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+  <script src="{{ url_for('static', filename='js/3p/jquery-1.11.1.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='js/3p/ejs_production.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='js/3p/underscore-min.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='js/view.js') }}" type="text/javascript"></script>
+  <script src="{{ url_for('static', filename='js/extension.js') }}" type="text/javascript"></script>
+
+<script type="text/javascript">
+  var recipeUrl = '{{ recipeUrl }}'; 
+</script>
+
+</head>
+  <body>
+    <div id="download-extension">
+      <div class="error"></div>
+      <div class="error-text">
+        Sorry! We couldn't read your recipe.<br />
+        But don't worry! Try our free Google Chrome extension to quicky and easily prepare your recipe for SousChef!
+      </div>
+    </div>
+    <div id="extension-downloaded">
+      <div class="error"></div>
+      <div class="error-text">
+       Sorry! We couldn't read your recipe.<br />
+       You are being redirected to your recipe, where you can use our Google Chrome extension to prepare your recipe for SousChef!
+      </div>
+    </div>
+  </body>
+</html>

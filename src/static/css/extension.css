@@ -1,0 +1,19 @@
+body {
+  text-align: center;
+}
+
+#extension-downloaded,
+#download-extension {
+  display: none;
+}
+
+.error {
+  margin-top: 14px;
+}
+
+.error-text {
+  text-align: center;
+  width: 400px;
+  margin: auto;
+  padding-top: 20px;
+}

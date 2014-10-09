@@ -1,15 +1,24 @@
 from bs4 import BeautifulSoup
 from exceptions import AttributeError
+import urllib2
 
 class RecipeParser():
 
-    def parse_data(self, input):
+    def parse_data(self, url, image_only=False):
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', 'Recipe/1.0 +https://github.com/jossoco/recipe-thing')
+        input = urllib2.urlopen(req)
+
         soup = BeautifulSoup(input)
         data = {}
+        data['imageUrl'] = self._parse_image(soup)
+
+        if image_only:
+            return data
+
         data['title'], data['sourceName'] = self._parse_title_and_source(soup)
         data['steps'] = self._parse_text_list(soup, 'instruction', ['recipeInstructions', 'instructions'])
         data['ingredients'] = self._parse_text_list(soup, 'ingredient', ['ingredient', 'ingredients'])
-        data['imageUrl'] = self._parse_image(soup)
 
         if len(data['steps']) == 0:
             data['recipeHtml'] = self._parse_recipe_html(soup)
@@ -140,3 +149,7 @@ class RecipeParser():
 def parse_recipe(input):
     parser = RecipeParser()
     return parser.parse_data(input)
+
+def parse_recipe_image(recipe_url):
+    parser = RecipeParser()
+    return parser.parse_data(recipe_url, image_only=True)

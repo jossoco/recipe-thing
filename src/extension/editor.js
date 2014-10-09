@@ -89,6 +89,7 @@ function Editor() {
     $(this.nextButton).on('click', $.proxy(this.onNextButtonClick, this));
     $(this.backButton).on('click', $.proxy(this.onBackButtonClick, this));
     $(this.doneButton).on('click', $.proxy(this.onDoneButtonClick, this));
+    $(this.reviewNextButton).on('click', $.proxy(this.onReviewNextButtonClick, this));
   };
 
   this.onAddButtonClick = function () {
@@ -293,6 +294,23 @@ function Editor() {
     if (!this.doneButton.hasClass('disabled')) {
       this.loadReviewDialog();
     }
+  };
+
+  this.onReviewNextButtonClick = function () {
+    var data = JSON.stringify(this.recipeData);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:5000/extension', true);
+
+    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+    xhr.setRequestHeader("Content-length", data.length);
+    xhr.setRequestHeader("Connection", "close");
+
+    var recipeUrl = this.recipeData.url;
+    xhr.onload = function () {
+      console.log(this.responseText);
+      window.location.href = 'http://localhost:5000/recipe?url=' + recipeUrl;
+    };
+    xhr.send(data);
   }
 };
 

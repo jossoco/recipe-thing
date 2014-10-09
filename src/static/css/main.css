@@ -1,3 +1,7 @@
+body {
+  font-family: 'Lato', sans-serif;
+}
+
 .button {
   background-color: #2A9AAE;
   -webkit-border-radius: 20px;
@@ -33,4 +37,14 @@
 .button.disabled {
   background-color: #AAA;
   cursor: default;
+}
+
+.error {
+  width: 300px;
+  height: 190px;
+  opacity: 0.8;
+  background-image: url("../images/egg.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
 }

@@ -1,8 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for
 from mongoengine import connect
 from flask.ext.mongoengine import MongoEngine
-from recipe.parser import parse_recipe
-import urllib2
+from recipe.parser import parse_recipe, parse_recipe_image
 import json
 import os
 
@@ -57,15 +56,12 @@ def recipe():
         }))
     else:
         try:
-            req = urllib2.Request(url)
-            req.add_header('User-Agent', 'Recipe/1.0 +https://github.com/jossoco/recipe-thing')
-            res = res.open = urllib2.urlopen(req)
-            data = parse_recipe(res.read())
+            data = parse_recipe(url)
             data['url'] = url
             if os.environ.get('DEBUG') or len(data['steps']) > 0:
                 return render_template('recipe.html', data=json.dumps(data))
             else:
-               return redirect(url_for('editor', data=json.dumps(data)))
+               return redirect(url_for('extension', recipe_url=url))
         except urllib2.HTTPError as httpError:
             session['error'] = "URL Error"
             return redirect(url_for('form'))
@@ -84,19 +80,20 @@ def form():
 
     return render_template('form.html')
 
-@app.route('/editor', methods=['GET', 'POST'])
-def editor():
+@app.route('/extension', methods=['GET', 'POST'])
+def extension():
     if request.method == 'POST':
       try:
           data = request.get_json()
-          Recipe(title=data['title'], sourceName=data['sourceName'], imageUrl=data['imageUrl'],
-                 recipeUrl=data['recipeUrl'], steps=data['steps'], ingredients=data['ingredients']).save()
+          image_url = parse_recipe_image(data['url'])['imageUrl']
+          Recipe(title=data['title'], sourceName=data['sourceName'], imageUrl=image_url,
+                 recipeUrl=data['url'], steps=data['steps'], ingredients=data['ingredients']).save()
           return 'SUCCESS'
       except Exception as exc:
           raise(exc)
 
-    data = request.args.get('data')
-    return render_template('parser.html', data=json.dumps(data))
+    recipe_url = request.args.get('recipe_url')
+    return render_template('extension.html', recipeUrl=recipe_url)
 
 
 if __name__ == "__main__":

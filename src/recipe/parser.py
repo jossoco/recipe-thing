@@ -1,15 +1,28 @@
 from bs4 import BeautifulSoup
 from exceptions import AttributeError
+import urllib2
 
 class RecipeParser():
 
-    def parse_data(self, input):
+    def parse_data(self, url, image_only=False):
+        req = urllib2.Request(url)
+        req.add_header('User-Agent', 'Recipe/1.0 +https://github.com/jossoco/recipe-thing')
+        input = urllib2.urlopen(req)
+
         soup = BeautifulSoup(input)
         data = {}
+        data['imageUrl'] = self._parse_image(soup)
+
+        if image_only:
+            return data
+
         data['title'], data['sourceName'] = self._parse_title_and_source(soup)
         data['steps'] = self._parse_text_list(soup, 'instruction', ['recipeInstructions', 'instructions'])
         data['ingredients'] = self._parse_text_list(soup, 'ingredient', ['ingredient', 'ingredients'])
-        data['imageUrl'] = self._parse_image(soup)
+
+        if len(data['steps']) == 0:
+            data['recipeHtml'] = self._parse_recipe_html(soup)
+
         return data
 
     def _parse_title_and_source(self, soup):
@@ -33,7 +46,6 @@ class RecipeParser():
     def _parse_text_list(self, soup, class_name, item_props):
         list = []
         els = soup.find_all(class_=class_name)
-
         if len(els) == 0:
             child_els = []
             for item_prop in item_props:
@@ -61,20 +73,32 @@ class RecipeParser():
         return list
 
     def _parse_image(self, soup):
-        tagged_images = soup.find_all(attrs={'itemprop': 'image'})
-        if len(tagged_images) == 1 and 'src' in tagged_images[0].attrs:
-            return tagged_images[0].attrs['src']
+        item_props = ['image', 'photo']
+        images = None 
+        for prop in item_props:
+            tagged_images = soup.find_all(attrs={'itemprop': prop})
+            if len(tagged_images) == 1 and 'src' in tagged_images[0].attrs:
+                return tagged_images[0].attrs['src']
+            elif len(tagged_images) > 1:
+                images = tagged_images
+                break
+        if not images:
+            images = soup.find_all('img')
 
-        images = soup.find_all('img')
         if len(images) > 1:
-            target_image = ''
+            target_image = None
             max_area = 0
             for image in images:
-                area = self._get_image_area(image)
-                if area > max_area:
-                    max_area = area
-                    target_image = image
-            if target_image and 'src' in target_image.attrs:
+                if 'src' in image.attrs and str.startswith(str(image.attrs['src']), 'http'):
+                    area = self._get_image_area(image)
+                    if area > max_area:
+                        max_area = area
+                        target_image = image
+            if max_area == 0 and images[0].attrs and images[0].attrs['src']:
+                # If images don't have dimensions just return first one
+                # (usually logo so maybe not best)
+                return images[0].attrs['src']
+            if target_image:
                 return target_image.attrs['src']
         elif len(images) == 1 and 'src' in images[0].attrs:
             return images[0].attrs['src']
@@ -95,7 +119,37 @@ class RecipeParser():
         except:
             return 0
 
+    def _parse_recipe_html(self, soup):
+        # Remove page head
+        soup.head.decompose()
+
+        # Remove elements with these classes or ids
+        strip_tags = ['comments', 'sidebar', 'nav']
+        for tag in strip_tags:
+            class_el = soup.find(class_=tag)
+            if class_el:
+                class_el.decompose()
+            id_el = soup.find(id=tag)
+            if id_el:
+                id_el.decompose()
+
+        # Remove elements of these types
+        strip_types = ['script', 'img', 'form']
+        for type in strip_types:
+            [s.extract() for s in soup(type)]
+
+        # Try to remove empty elements -- needs some work
+        def is_empty(text):
+            return len(text.strip()) == 0
+        [s.extract() for s in soup.find_all(text=is_empty)]
+
+        return str(soup)
+
 
 def parse_recipe(input):
     parser = RecipeParser()
     return parser.parse_data(input)
+
+def parse_recipe_image(recipe_url):
+    parser = RecipeParser()
+    return parser.parse_data(recipe_url, image_only=True)

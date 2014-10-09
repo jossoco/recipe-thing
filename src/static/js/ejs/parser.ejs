@@ -1,0 +1,34 @@
+<div id="recipe-parser">
+
+<div id="recipe-parser-header">
+  <div class="header">
+    <h1>Recipe Editor</h1>
+  </div>
+  <span class="directions">
+    The original recipe content is displayed below. Use the dialogs on the right to select and edit the different parts of the
+    recipe.
+  </span>
+</div>
+
+<div id="parse-widget">
+  <div class="header"><%= type %></div>
+  <div class="content">
+    Highlight <span class="type"><%= type %></span>, then click the <span class="highlight">Add</span> button.
+    <span class="ingredients">When all <%= type %> have been selection, click the <span class="highlight">Next</span> button to continue.</span>
+    <span class="step hidden">Click the <span class="highlight">Next</span> button to continue.</span>
+
+    <div class="label">Selected <span class="type"><%= type %></span>:</div>
+    <div class="widget-contents"></div>
+    <div class="buttons">
+      <span class="button add-btn disabled">Add</span>
+      <span class="button next-btn disabled">Next</span>
+      <span class="button done-btn">Done</span>
+    </div>
+  </div>
+</div>
+
+<div id="recipe-panel">
+  <p><%= recipeHtml %></p>
+</div>
+
+</div>

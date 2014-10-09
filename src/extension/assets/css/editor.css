@@ -1,0 +1,276 @@
+body {
+  cursor: text;
+}
+
+#recipez-editor {
+  width: 250px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999999999999;
+  font-family: 'Lato', sans-serif !important;
+  font-size: 14px !important;
+  color: #444;
+  background-color: #EEE;
+  box-shadow: 5px 5px 30px #222 !important;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  text-transform: none !important;
+}
+
+#recipez-editor .recipez-editor-head {
+  background-color: #4FB5B3 !important;
+  color: #EEE !important;
+  padding: 4px !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+  font-size: 16px !important;
+
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+#recipez-editor .recipez-editor-body {
+  padding: 10px;
+  line-height: 18px !important;
+  font-size: 14px !important;
+
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-bottom-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-bottom-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  border: 4px solid #CCC;
+  border-top: 0;
+}
+
+#recipez-editor .recipez-editor-body .recipez-editor-body-contents {
+  background-color: #FFF;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px dashed #CCC;
+  min-height: 20px;
+  max-height: 250px;
+  overflow-y: scroll;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#recipez-review .button-label,
+#recipez-editor .button-label {
+  background-color: #DDD;
+  padding: 0 8px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+
+#recipez-review .buttons,
+#recipez-editor .buttons {
+  text-align: center;
+}
+
+#recipez-review .button,
+#recipez-editor .button {
+  margin: 18px 2px 2px 2px !important;
+  padding: 8px !important;
+  background-color: #2A9AAE !important;
+  min-width: 45px !important;
+  display: inline-block;
+  cursor: pointer !important;
+  color: #EEE !important;
+  font-size: 16px !important;
+  -webkit-border-radius: 20px !important;
+  -moz-border-radius: 20px !important;
+  border-radius: 20px !important;
+  text-align: center !important;
+  -moz-user-select: none !important;
+  -khtml-user-select: none !important;
+  -webkit-user-select: none !important;
+  -o-user-select: none !important;
+
+  border: 0 !important;
+}
+
+#recipez-review .button:hover,
+#recipez-editor .button:hover {
+  background-color: #4FB5B3 !important;
+}
+
+#recipez-review .button.disabled,
+#recipez-editor .button.disabled {
+  background-color: #AAA !important;
+  cursor: default !important;
+}
+
+#recipez-review .button.disabled:hover,
+#recipez-editor .button.disabled:hover {
+  background-color: #AAA !important;
+}
+
+#recipez-editor #back-btn,
+#recipez-editor #next-btn {
+  min-width: 20px !important;
+}
+
+.recipez-selected {
+  background-color: #DDD !important;
+}
+
+.recipez-highlighted {
+  background-color: #FFFA70 !important;
+}
+
+#recipez-editor .recipez-editor-body-contents ul {
+  margin-left: 20px !important;
+}
+
+#recipez-review.hidden,
+#recipez-editor.hidden,
+#recipez-editor .hidden {
+  display: none;
+}
+
+#recipez-review {
+  width: 60% !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  position: fixed;
+  z-index: 9999999999999;
+  font-family: 'Lato', sans-serif !important;
+  border: 2px solid #CCC;
+  background-color: #FFF;
+  box-shadow: 5px 5px 30px #222 !important;
+  text-transform: none !important;
+  font-size: 14px !important;
+}
+
+#recipez-review .recipez-review-body {
+  padding: 10px;
+}
+
+#recipez-bg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8888888888;
+  background-color: #000;
+  opacity: 0.4;
+}
+
+#recipez-review .recipez-review-head {
+  background-color: #CCC;
+  text-transform: uppercase !important;
+  text-align: center;
+  padding: 4px;
+}
+
+#recipez-review .recipez-review-sections {
+  height: 350px !important;
+}
+
+#recipez-review .recipez-review-section {
+  float: left;
+  margin: 6px;
+}
+
+#recipez-review .recipez-review-section-body {
+  border: 1px dashed #CCC;
+  padding: 12px;
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#recipez-review .recipez-review-section-body ul {
+  list-style-type: circle !important;
+}
+
+#recipez-review .recipez-review-section-body ol {
+  list-style-type: decimal !important;
+}
+
+#recipez-review .recipez-review-section-body li {
+  margin-left: 20px !important;
+}
+
+#recipez-review .recipez-review-section-label {
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  color: #CCC !important;
+}
+
+#recipez-review .recipez-review-section.title {
+  width: 98% !important;
+}
+
+#recipez-review .recipez-review-section.steps,
+#recipez-review .recipez-review-section.ingredients {
+  width: 48% !important;
+}
+
+#recipez-review .recipez-review-section.steps .recipez-review-section-body,
+#recipez-review .recipez-review-section.ingredients .recipez-review-section-body {
+  height: 200px !important;
+  overflow-y: scroll;
+}
+
+#recipez-review .recipez-review-content {
+  clear: both;
+}
+
+#recipez-editor .contents-label {
+  display: block;
+  padding-top: 12px;
+}
+
+#recipez-editor .recipez-editor-body-contents ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+#recipez-editor .recipez-editor-body-contents li {
+  text-indent: -20px;
+  cursor: pointer;
+}
+
+#recipez-editor .recipez-editor-body-contents li:before {
+  content: "\2022";
+  height: 16px;
+  text-align: center;
+  text-indent: -2em;
+  margin-right: 8px;
+  padding: 2px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+#recipez-editor .recipez-editor-body-contents li:hover {
+  background-color: #FFEEEE;
+}
+
+#recipez-editor .recipez-editor-body-contents li:hover:before {
+  content: "\00d7";
+  color: #EEE;
+  background-color: #A81D22;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  height: 8px;
+  font-size: 12px;
+  padding: 0 4px;
+  margin-right: 5px;
+}

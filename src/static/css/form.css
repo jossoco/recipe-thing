@@ -2,10 +2,6 @@ body, #recipe-form {
   height: 100%;
 }
 
-body {
-  font-family: 'Lato', sans-serif;
-}
-
 #recipe-form {
   text-align: center;
   width: 100%;
